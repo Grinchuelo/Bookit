@@ -1,0 +1,234 @@
+@font-face {
+    font-family: 'made_tommy_light';
+    src: url('../assets/fonts/made_tommy/MADE\ TOMMY\ Light_PERSONAL\ USE.otf');
+}
+@font-face {
+    font-family: 'made_tommy_bold';
+    src: url('../assets/fonts/made_tommy/MADE\ TOMMY\ Bold_PERSONAL\ USE.otf');
+}
+@font-face {
+    font-family: 'made_tommy';
+    src: url('../assets/fonts/made_tommy/MADE\ TOMMY\ Regular_PERSONAL\ USE.otf');
+}
+@font-face {
+    font-family: 'nexa-heavy';
+    src: url('../assets/fonts/nexa/Nexa-Heavy.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'made_tommy_light';
+}
+
+.flex {
+    display: flex !important;
+}
+
+li {
+    list-style: none;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-size: 10px;
+}
+
+body {
+    padding: 1.7rem;
+    background: #f2f7ff;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+header {
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    justify-content: space-between;
+}
+header svg {
+    width: 4rem;
+    height: 4rem;
+    transform: translate(.7rem, -.3rem); 
+}
+header .userProfile {
+    text-decoration: none;
+    font-size: 1.8rem;
+    color: #3783f5;
+    font-family: 'made_tommy_bold';
+}
+
+menu {
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+menu input {
+    width: 100%;
+    height: 5rem;
+    padding: 0 1.8rem;
+
+    font-family: 'made_tommy';
+    font-size: 1.6rem;
+    color: #7b7b7b;
+
+
+    outline: none;
+    border: none;
+    border-radius: 2rem;
+}
+menu input::placeholder {
+    color: #7b7b7b;
+}
+menu .dropdown-genres {
+    width: 9rem;
+    height: calc(100% - 5.5rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    font-family: 'made_tommy';
+    font-size: 1.5rem;
+    color: #fff;
+
+    border-radius: 10rem;
+    background-color: #3783f5;
+}
+menu .dropdown-genres .genres-list {
+    display: none;
+
+    width: 34rem;
+    height: 44rem;
+    padding: 1.7rem;
+    position: absolute;
+    bottom: -44rem; left: 0;
+
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .01rem;
+
+    
+    
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #dfe4eb;
+    border-radius: 3rem;
+    z-index: 100;
+}
+menu .dropdown-genres .genres-list .category ul{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+menu .dropdown-genres .genres-list .category ul li{
+    font-size: 1.6rem;
+}
+menu .dropdown-genres .genres-list h2 {
+    font-family: 'nexa-heavy';
+    font-size: 1.4rem;
+    color: #3783f5;
+}
+
+main {
+    padding-top: 2rem;
+    color: #7b7b7b;
+    font-size: 1.2rem;
+}
+
+.category-slide {
+    position: absolute;
+    width: calc(12rem * 10) + 1rem * 9;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.slide-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 1rem;
+}
+
+.card {
+    width: 12rem;
+    height: 21.7rem;
+    padding: .5rem;
+
+    background-color: #fff;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.card .bookCover-container {
+    width: 100%;
+    height: 76%;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card .bookCover-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card .info-container {
+    width: 100%;
+    height: 25%;
+}
+
+.card .tags-container {
+    width: 100%;
+    height: 2.2rem;
+} 
+.card .tags-container .tag {
+    max-width: 75%;
+    width: fit-content;
+    height: 100%;
+    padding: 0 .8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'made_tommy_light';
+    border-radius: 5rem;
+    background-color: #f2f7ff;
+}
+
+.card .priceAndStars-container {
+    width: 100%;
+    height: 2.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.card .priceAndStars-container .priceCard {
+    font-size: 1.5rem;
+    font-family: 'made_tommy_bold';
+    color: #3783f5;
+}
+.card .priceAndStars-container .starsCard {
+    height: 100%;
+    color: #000;
+}
+.card .priceAndStars-container .starsCard svg {
+    width: 24px;
+    fill: none;
+    height: calc(100% - 1rem);
+    transform: translateY(.4rem);
+}
+
