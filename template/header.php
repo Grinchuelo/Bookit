@@ -1,6 +1,8 @@
 <header>
-    <a href="userProfile.php" class="userProfile">Grinchuelo</a>
-    <svg class="icon book">
-        <use href="./assets/icons/icons.svg#blueBook-icon"></use>
-    </svg>
+    <a href="home.php" class="home">Bookit</a>
+    <a href="miBiblioteca.php">
+        <svg class="icon book">
+            <use href="./assets/icons/icons.svg#bookUser-icon"></use>
+        </svg>
+    </a>
 </header>

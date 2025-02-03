@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/general.css">
     <link rel="stylesheet" href="./css/index.css">
     <title>Bookit</title>
 </head>
@@ -20,6 +21,7 @@
                 <p>¿Ya tienes una cuenta?</p>
                 <a href="./logIn.php">Iniciar sesión</a>
             </div>
+            <a href="./home.php" class="withoutLogin">Continuar sin iniciar sesión</a>
         </div>
     </div>
 </body>

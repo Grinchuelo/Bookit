@@ -1,0 +1,17 @@
+<?php
+    include('./conection.php');
+    
+    $query = $conection->prepare("SELECT * FROM libros");
+    $query->execute();
+    $libros = $query->fetchAll(PDO::FETCH_ASSOC);
+    
+    include('./generarNombreArchivoAVIF.php'); 
+
+    foreach ($libros as $libro) {
+        $nombreArchivo = generarNombreArchivoAVIF($libro['nombre_libro']); 
+        $query = $conection->prepare("UPDATE libros SET portada_libro = :nombreArchivo WHERE id_libro = :id");
+        $query->bindParam(':nombreArchivo', $nombreArchivo);
+        $query->bindParam(':id', $libro['id_libro']);
+        $query->execute();
+    }
+?>

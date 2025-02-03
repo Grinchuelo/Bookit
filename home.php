@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/home.css">
   <link rel="stylesheet" href="./css/general.css">
   <title>Bookit</title>
 </head>
@@ -73,94 +72,97 @@ $generosJEI = $query->fetchAll(PDO::FETCH_ASSOC);
     
   </menu>
   <main>
+    <?php
+    $query = $conection->prepare("SELECT * FROM libros ORDER BY vecesBuscado DESC LIMIT 45;");
+    $query->execute();
+    $masBuscados = $query->fetchAll(PDO::FETCH_ASSOC);
+    ?>
     <div class="category-slide most-searched">
       <h2>Más buscados</h2>
+            <!--AGREGAR SÓLO EN VISTA DE PC-->
+      <!-- <button class="scroll-btn left-btn">
+        <svg>
+          <use href="./assets/icons/icons.svg#arrowLeft-icon"></use>
+        </svg>
+      </button>
+      <button class="scroll-btn right-btn">
+        <svg>
+          <use href="./assets/icons/icons.svg#arrowRight-icon"></use>
+        </svg>
+      </button> -->
       <div class="slide-container">
-        <div class="card">
+        <?php
+        foreach ($masBuscados as $libro) {
+        ?>
+        <a href="libro.php?id_libro=<?php echo $libro['id_libro'] ?>" class="card" title="<?php echo $libro['nombre_libro']; ?>">
           <div class="bookCover-container">
-            <img src="./assets/bookCovers/Cien_años_de_soledad.png" alt="">
+            <img src="./assets/bookCovers/<?php echo $libro['portada_libro']; ?>" alt="">
           </div>
           <div class="info-container">
-            <div class="tags-container">
-              <div class="tag">
-                Realismo M
-              </div>
-            </div>
+            <div class="title-container">
+              <h3><?php echo $libro['nombre_libro']; ?></h3>
+            </div> 
             <div class="priceAndStars-container">
               <div class="priceCard">
-                $28900
+              $<?php echo $libro['precio_libro']; ?>
               </div>
               <div class="starsCard">
-                4.7
+                <?php echo $libro['stars_libro']; ?>
                 <svg>
                   <use href="./assets/icons/icons.svg#star-icon"></use>
-                </svg>
+                </svg> 
+              </div>
+            </div>
+          </div>
+        </a>
+        <?php } ?>
+        </div>
+      </div>
+    </div>
+    <?php
+    $query = $conection->prepare("SELECT * FROM libros ORDER BY stars_libro DESC LIMIT 45;");
+    $query->execute();
+    $masLikeados = $query->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+    <div class="category-slide most-liked">
+      <h2>Más gustados</h2>
+            <!--AGREGAR SÓLO EN VISTA DE PC-->
+      <!-- <button class="scroll-btn left-btn">
+        <svg>
+          <use href="./assets/icons/icons.svg#arrowLeft-icon"></use>
+        </svg>
+      </button>
+      <button class="scroll-btn right-btn">
+        <svg>
+          <use href="./assets/icons/icons.svg#arrowRight-icon"></use>
+        </svg>
+      </button> -->
+      <div class="slide-container">
+        <?php
+        foreach ($masLikeados as $libro) {
+        ?>
+        <div class="card" title="<?php echo $libro['nombre_libro']; ?>">
+          <div class="bookCover-container">
+            <img src="./assets/bookCovers/<?php echo $libro['portada_libro']; ?>" alt="">
+          </div>
+          <div class="info-container">
+            <div class="title-container">
+              <h3><?php echo $libro['nombre_libro']; ?></h3>
+            </div> 
+            <div class="priceAndStars-container">
+              <div class="priceCard">
+              $<?php echo $libro['precio_libro']; ?>
+              </div>
+              <div class="starsCard">
+                <?php echo $libro['stars_libro']; ?>
+                <svg>
+                  <use href="./assets/icons/icons.svg#star-icon"></use>
+                </svg> 
               </div>
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="bookCover-container">
-            <img src="./assets/bookCovers/la_cancion_de_aquiles.jpg" alt="">
-          </div>
-          <div class="info-container">
-            <div class="tags-container">
-              <div class="tag">
-                Realismo
-              </div>
-            </div>
-            <div class="priceAndStars-container">
-              <div class="priceCard">
-                $28900
-              </div>
-              <div class="starsCard">
-                4.7
-                <img src="./assets/icons/Star.png" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="bookCover-container">
-            <img src="./assets/bookCovers/la_cancion_de_aquiles.jpg" alt="">
-          </div>
-          <div class="info-container">
-            <div class="tags-container">
-              <div class="tag">
-                Realismo
-              </div>
-            </div>
-            <div class="priceAndStars-container">
-              <div class="priceCard">
-                $28900
-              </div>
-              <div class="starsCard">
-                4.7
-                <img src="./assets/icons/Star.png" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="bookCover-container">
-            <img src="./assets/bookCovers/la_cancion_de_aquiles.jpg" alt="">
-          </div>
-          <div class="info-container">
-            <div class="tags-container">
-              <div class="tag">
-                Realismo
-              </div>
-            </div>
-            <div class="priceAndStars-container">
-              <div class="priceCard">
-                $28900
-              </div>
-              <div class="starsCard">
-                4.7
-                <img src="./assets/icons/Star.png" alt="">
-              </div>
-            </div>
-          </div>
+        <?php } ?>
         </div>
       </div>
     </div>

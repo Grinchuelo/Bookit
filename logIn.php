@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/general.css">
-    <link rel="stylesheet" href="./css/logIn-signUp.css">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/logIn-signUp.css">
     <title>Bookit</title>
 </head>
 <body>
-    
-</body>
-</html>
     <div class="main-container">
         <div class="form-container">
             <div class="title-container">
@@ -33,4 +30,5 @@
             <p>¿No tienes una cuenta? <a href="./signUp.php">Regístrate</a></p>
         </div>
     </div>
-<?php include('./template/footer.php') ?>
+</body>
+</html>
