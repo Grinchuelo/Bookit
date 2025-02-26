@@ -1,6 +1,6 @@
 <?php
 if($_POST) {
-    include('../conection.php');
+    include('../config.php');
     $query = $conection->prepare("SELECT * FROM administradores WHERE nombre_admin=:nombre_admin AND clave_admin=:clave_admin");
     $query->bindParam(':nombre_admin', $_POST['username']);
     $query->bindParam(':clave_admin', $_POST['key']);
@@ -10,7 +10,7 @@ if($_POST) {
     if(!empty($administrador)) {
         session_start();
         $_SESSION['username'] = $administrador['nombre_admin'];
-        header('Location:home.php');
+        header('Location:dashboard.php');
     } else {
         $mensaje = "ERROR: nombre de administrador o contraseña incorrectos";
     }
@@ -25,7 +25,7 @@ if($_POST) {
     <link rel="stylesheet" href="./css/generalAdmin.css">
     <title>Ventana de administrador</title>
 </head>
-<body>
+<body class="form-body">
     <div class="main-container">
         <div class="form-container">
             <div class="icon-container">

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/generalAdmin.css">
+    <link rel="stylesheet" href="./css/panels.css">
+    <link rel="stylesheet" href="./css/agregar.css"> 
+    <title>Administrador - Agregar libros</title>
+</head>
+<body>
+    <header>
+        <a href="./dashboard.php">
+            <svg class="backBtn">
+                <use href="../assets/icons/icons.svg?v=2#backBtn-icon"></use>
+            </svg>
+        </a>
+        <h2>LIBROS</h2>
+        <a href="/admin/logout.php">
+            <svg>
+                <use href="../assets/icons/icons.svg?v=2#logout-icon"></use>
+            </svg>
+        </a>
+    </header>
+
+    <main>
+        <form action="">
+            <div class="input_label-container">
+                <label class="label_add" for="name">Título</label>
+                <input class="input_name" placeholder="Ingresa el título del libro" type="text" name="nombre_libro" id="name">
+            </div>
+            <div class="input_label-container">
+                <label class="label_add" for="desc">Descripción</label>
+                <textarea class="input_desc" placeholder="Ingresa la descripción del libro" type="text" name="desc_libro" id="desc" maxlength="500"></textarea>
+            </div>
+            <div class="input_label-container addAuthor-container">
+                <div class="biLabel">
+                    <label class="label_add" for="autor_nombre">Autor</label>
+                    <span class="instruction">¿No encuentra su autor? <span class="txt-bold">Añadir autor</span></span>
+                </div>
+                <div class="authorInput-container">
+                    <svg>
+                        <use href="../assets/icons/icons.svg?v=1#search-icon"></use>
+                    </svg>
+                    <input class="input_author" placeholder="Busca el nombre del autor" type="text" name="nombre_autor" id="autor_nombre" autocomplete="off" onkeyup="searchAuthors()">
+                    <div class="coinc-container"></div>
+                    <script src="../scripts/searchAuthors.js"></script>
+                </div>
+            </div>
+        </form>
+
+        <div class="title-container">
+            <h1><span class="txt-green">Agrega</span> un nuevo libro al catálogo</h1>
+        </div>  
+    </main>
+
+    <script>
+        let area = document.querySelector(".input_desc")
+        
+        area.addEventListener("input", () => {
+            area.style.height = `${area.scrollHeight}px`;
+        })   
+    </script>
+
+    
+</body>
+</html>

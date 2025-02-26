@@ -9,7 +9,7 @@
 </head>
 
 <?php 
-include('./conection.php'); 
+include('./config.php'); 
 
 $query = $conection->prepare("SELECT * FROM generos WHERE categoria_genero = 'fic'");
 $query->execute();
@@ -96,7 +96,7 @@ $generosJEI = $query->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <a href="libro.php?id_libro=<?php echo $libro['id_libro'] ?>" class="card" title="<?php echo $libro['nombre_libro']; ?>">
           <div class="bookCover-container">
-            <img src="./assets/bookCovers/<?php echo $libro['portada_libro']; ?>" alt="">
+            <img src="./assets/bookCovers/<?php echo $libro['portada_libro']; ?>.avif" alt="">
           </div>
           <div class="info-container">
             <div class="title-container">
@@ -143,7 +143,7 @@ $generosJEI = $query->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <div class="card" title="<?php echo $libro['nombre_libro']; ?>">
           <div class="bookCover-container">
-            <img src="./assets/bookCovers/<?php echo $libro['portada_libro']; ?>" alt="">
+            <img src="./assets/bookCovers/<?php echo $libro['portada_libro']; ?>.avif" alt="">
           </div>
           <div class="info-container">
             <div class="title-container">
@@ -169,6 +169,4 @@ $generosJEI = $query->fetchAll(PDO::FETCH_ASSOC);
   </main>
 
   <script src="./scripts/index.js"></script>
-</body>
-
-</html>
+<?php include('./template/footer.php'); ?>

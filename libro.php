@@ -9,7 +9,7 @@
 <body>
   <?php include('./template/header.php') ?>
   <?php
-  include('./conection.php');
+  include('./config.php');
   $id_libro = $_GET['id_libro'];
   $query = $conection->prepare("SELECT * FROM libros WHERE id_libro = :id_libro");
   $query->bindParam(':id_libro', $id_libro);
@@ -34,7 +34,7 @@
     <div class="book-data">
       <div class="book-data-first">
         <div class="img-container">
-          <img src="./assets/bookCovers/<?php echo $libro['portada_libro']; ?>" alt="">
+          <img src="./assets/bookCovers/<?php echo $libro['portada_libro']; ?>.avif" alt="">
         </div>
         <div class="info-container">
           <div class="title-container">
@@ -99,5 +99,4 @@
       </a>
     </div>
   </div>
-</body>
-</html>
+  <?php include('./template/footer.php'); ?>

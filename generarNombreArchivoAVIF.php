@@ -2,7 +2,7 @@
 /* Esto crea los nombres de las imágenes en formato camelCase y agrega la
 extensión AVIF */
 function generarNombreArchivoAVIF($nombre_archivo) {
-    include('./conection.php');
+    include('./config.php');
 
     // Sacar tildes y otros diacríticos
     $unwanted_array = array('Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
