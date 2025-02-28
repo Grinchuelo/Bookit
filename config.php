@@ -21,6 +21,6 @@ try {
     $conection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $ex) {
     error_log($ex->getMessage());
-    echo "Connection failed: Please try again later.";
+    echo "La conexión falló. Por favor intentá de nuevo más tarde.";
 }
 ?>
