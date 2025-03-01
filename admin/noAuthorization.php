@@ -1,4 +1,7 @@
 <div class="noAuthorization-container">
+    <?php
+    var_dump($_SESSION);
+    ?>
     <svg class="noAutnoAuthorization-icon">
         <use href="../assets/icons/icons.svg?v=2#warning-icon"></use>
     </svg>
