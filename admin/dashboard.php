@@ -7,8 +7,15 @@
     <title>Panel de administrador</title>
 </head>
 <body>
+    <?php
+    session_start();
+    if (!isset($_SESSION['username'])) {
+        include('./noAuthorization.php');
+        die();
+    } 
+    ?>
     <header>
-        <a href="/admin/logout.php">
+        <a href="./logout.php">
             <svg>
                 <use href="../assets/icons/icons.svg#logout-icon"></use>
             </svg>

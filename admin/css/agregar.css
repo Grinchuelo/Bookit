@@ -129,7 +129,6 @@ form .input_label-container input::placeholder, textarea::placeholder {
     top: 3.2rem;
     left: 0;
 
-
     overflow: hidden;
     background-color: #fff;
     border: solid 1px #DFE4EB;
@@ -166,7 +165,6 @@ form .input_desc {
 
 form .bottom_form-container { 
     width: 100%;
-    margin-top: 6.6rem;
 
     display: flex;
     gap: 2.3rem;

@@ -201,7 +201,7 @@ main .lastAdded-container .list-container .book-card {
     font-weight: 300;
     color: #fff;
     border-radius: 3rem;
-    background-color: #3783F5;
+    background-color: #00bf63;
     transition: all .3s;
 }
 .show {
