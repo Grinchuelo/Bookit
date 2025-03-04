@@ -1,3 +1,8 @@
+<?php
+include('../global/checkLogIn.php');
+var_dump($_SESSION);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +14,6 @@
     <title>Administrador - Agregar libros</title>
 </head>
 <body>
-    <?php
-    include('../global/checkLogIn.php');
-    var_dump($_SESSION);
-    ?>
     <header>
         <a href="./dashboard.php">
             <svg class="backBtn">

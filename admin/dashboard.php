@@ -1,3 +1,8 @@
+<?php
+include('../global/checkLogIn.php');
+var_dump($_SESSION);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +12,6 @@
     <title>Panel de administrador</title>
 </head>
 <body>
-    <?php
-    include('../global/checkLogIn.php');
-    var_dump($_SESSION);
-    ?>
     <header>
         <a href="./logout.php">
             <svg>
