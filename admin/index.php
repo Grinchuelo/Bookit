@@ -9,6 +9,7 @@ if($_POST) {
 
     if(!empty($administrador)) {
         session_start();
+        $_SESSION['check'] = "OK";
         $_SESSION['username'] = $administrador['nombre_admin'];
         header('Location:dashboard.php');
     } else {

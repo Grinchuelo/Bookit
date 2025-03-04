@@ -9,11 +9,8 @@
 </head>
 <body>
     <?php
-    session_start();
-    if (!isset($_SESSION['username'])) {
-        include('./noAuthorization.php');
-        die();
-    } 
+    include('./checkLogIn.php');
+    var_dump($_SESSION);
     ?>
     <header>
         <a href="./dashboard.php">
