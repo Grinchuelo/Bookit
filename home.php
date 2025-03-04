@@ -1,3 +1,8 @@
+<?php 
+  session_start();
+  var_dump($_SESSION);
+  ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,10 +33,7 @@ $generosJEI = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <body>
-  <?php 
-  session_start();
-  var_dump($_SESSION);
-  ?>
+  
   <?php include('./template/header.php') ?>
   <menu>
     <input type="text" name="" id="" placeholder="Buscar un libro...">
