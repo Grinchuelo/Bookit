@@ -9,7 +9,7 @@
 </head>
 <body>
     <?php
-    include('./checkLogIn.php');
+    include('../global/checkLogIn.php');
     var_dump($_SESSION);
     ?>
     <header>

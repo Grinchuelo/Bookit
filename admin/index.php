@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_POST) {
+if ($_POST) {
     include('../config.php');
     $query = $conection->prepare("SELECT * FROM administradores WHERE nombre_admin=:nombre_admin AND clave_admin=:clave_admin");
     $query->bindParam(':nombre_admin', $_POST['username']);
@@ -8,7 +8,7 @@ if($_POST) {
     $query->execute();
     $administrador = $query->fetch(PDO::FETCH_LAZY);
 
-    if(!empty($administrador)) {
+    if (!empty($administrador)) {
         $_SESSION['check'] = "OK";
         $_SESSION['username'] = $administrador['nombre_admin'];
         header('Location:dashboard.php');

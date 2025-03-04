@@ -1,3 +1,23 @@
+<?php
+session_start();
+if ($_POST) {
+    include('./config.php');
+    $query = $conection->prepare("SELECT * FROM usuarios WHERE nombre_usuario = :nombre_usuario AND clave_usuario = :clave_usuario");
+    $query->bindParam(':nombre_usuario', $_POST['username']);
+    $query->bindParam(':clave_usuario', $_POST['key']);
+    $query->execute();
+    $usuario = $query->fetch(PDO::FETCH_LAZY);
+
+    if (!empty($usuario)) {
+        $_SESSION['check'] = "OK";
+        $_SESSION['username'] = $usuario['nombre_usuario'];
+        header('Location:home.php');
+    } else {
+        $mensaje = "ERROR: nombre de usuario o contraseña incorrectos";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +34,12 @@
             <div class="title-container">
                 <h1>Iniciar sesión</h1>
             </div>
-            <form method="">
+            <?php if(isset($mensaje)) { ?>
+            <div class="error-container">
+                <span><?php echo $mensaje; ?></span>
+            </div>
+            <?php } ?>
+            <form method="POST">
                 <div class="username-container input-container">
                     <label>nombre de usuario</label>
                     <input type="text" name="username" id="username" maxlength="20">
