@@ -1,6 +1,8 @@
 <?php
-include('../global/checkLogIn.php');
-var_dump($_SESSION);
+session_start();
+if (!isset($_SESSION['check'])) {
+    $noAuth = true;
+} 
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +13,13 @@ var_dump($_SESSION);
     <link rel="stylesheet" href="./css/generalAdmin.css">
     <title>Panel de administrador</title>
 </head>
+<?php
+error_reporting(0); // En el caso de que no se haya declarado $noAuth, para evitar que aparezca el error
+if ($noAuth) {
+    include('./noAuthorization.php');
+    die();
+}
+?>
 <body>
     <header>
         <a href="./logout.php">

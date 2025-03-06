@@ -1,6 +1,8 @@
 <?php
-include('../global/checkLogIn.php');
-var_dump($_SESSION);
+session_start();
+if (!isset($_SESSION['check'])) {
+    $noAuth = true;
+} 
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +13,18 @@ var_dump($_SESSION);
     <link rel="stylesheet" href="./css/generalAdmin.css">
     <link rel="stylesheet" href="./css/panels.css">
     <link rel="stylesheet" href="./css/agregar.css"> 
+
+    <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.6.0"></script>
+
+
     <title>Administrador - Agregar libros</title>
 </head>
+<?php
+if (isset($noAuth)) {
+    include('./noAuthorization.php');
+    die();
+}
+?>
 <body>
     <header>
         <a href="./dashboard.php">
@@ -30,7 +42,7 @@ var_dump($_SESSION);
 
     <main>
         <div class="forms-container">
-            <form action="">
+            <form action="" enctype="multipart/form-data">
                 <div class="input_label-container">
                     <label class="label_add" for="name">Título</label>
                     <input class="input_name" placeholder="Ingresa el título del libro" type="text" name="nombre_libro" id="name">
@@ -57,16 +69,17 @@ var_dump($_SESSION);
                     <div class="input_label-container bookCover-container">
                         <label for="bookCover-input" class="label_add">Portada</label>
                         <div class="addBookcover_input-container">
+                            <img src="" alt="" id="bookCover-img">
                             <svg>
                                 <use href="../assets/icons/icons.svg?v=3#image-icon"></use>
                             </svg>
                             <span class="txt">Selecciona un archivo</span>
-                            <input type="file" name="portada_libro" id="bookCover-input">
+                            <input type="file" name="portada_libro" id="bookCover-input" accept="image/*" onchange="previewImage(event)">
                         </div>
                     </div>
                     <div class="bottom_form_right-container">
                         <div class="input_label-container">
-                            <label class="label_add" for="autor_nombre">Precio <span class="instruction">($ARS)</span> </label>
+                            <label class="label_add" for="precio_libro">Precio <span class="instruction">($ARS)</span> </label>
                             <div class="priceInput-container">
                                 <span class="price-icon">$</span>
                                 <input class="input_price" type="text" name="precio_libro" id="precio_libro" min="0" max="1000000">
@@ -86,13 +99,15 @@ var_dump($_SESSION);
         </div>  
     </main>
 
+    <script src="../scripts/formatPriceInput.js"></script>
+    <script src="../scripts/previewImage.js"></script>
     <!-- <script>
         let area = document.querySelector(".input_desc")
         
         area.addEventListener("input", () => {
             area.style.height = `${area.scrollHeight}px`;
-        })   
-    </script> -->
+        })    
+    </script>  -->
 
     
 </body>

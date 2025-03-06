@@ -16,15 +16,15 @@
             </div>
             <form method="">
                 <div class="email-container input-container">
-                    <label>correo electrónico</label>
+                    <label>Correo electrónico</label>
                     <input type="email" name="email" id="email" maxlength="100">
                 </div>
                 <div class="username-container input-container">
-                    <label>nombre de usuario</label>
+                    <label>Nombre de usuario</label>
                     <input type="text" name="username" id="username" maxlength="20">
                 </div>
                 <div class="key-container input-container">
-                    <label>contraseña</label>
+                    <label>Contraseña</label>
                     <input type="password" name="key" id="password" maxlength="50">
                 </div>
                 <div class="btn-container">

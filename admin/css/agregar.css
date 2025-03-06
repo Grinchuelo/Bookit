@@ -199,6 +199,15 @@ form .bottom_form-container .bookCover-container .addBookcover_input-container {
     border-radius: 10px;
 }
 
+.addBookcover_input-container img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    object-fit: cover;
+
+    display: none;
+}
 .addBookcover_input-container svg {
     width: 98px;
     height: 98px;

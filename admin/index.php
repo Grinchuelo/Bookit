@@ -41,11 +41,11 @@ if ($_POST) {
             <?php } ?>
             <form method="POST">
                 <div class="username-container input-container">
-                    <label>nombre de administrador</label>
+                    <label>Nombre de administrador</label>
                     <input type="text" name="username" id="username" maxlength="20" required>
                 </div>
                 <div class="key-container input-container">
-                    <label>contraseña</label>
+                    <label>Contraseña</label>
                     <input type="password" name="key" id="password" maxlength="50" required>
                 </div>
                 <div class="btn-container">
