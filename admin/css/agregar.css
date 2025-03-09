@@ -170,10 +170,42 @@ form .bottom_form-container {
     gap: 2.3rem;
 }
 form .bottom_form-container .bottom_form_right-container {
+    width: 100%; 
     height: auto;
+
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+form .bottom_form-container .bottom_form_right-container .submitForm_btn-container {
+    width: 15.2rem;
+    height: 6.5rem;
+
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0; right: 0;
+}
+form .bottom_form-container .bottom_form_right-container .submitForm_btn-container button {
+    width: 15.2rem;
+    height: 3.2rem;
+
+    position: absolute;
+    bottom: 0; right: 0;
+
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #00bf63;
+    border-radius: 1rem;
+
+}
+form .bottom_form-container .bottom_form_right-container .submitForm_btn-container span {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 14px;
+    color: #E72323;
+
+    display: none;
 }
 form .bottom_form-container .bookCover-container {
     width: auto;
@@ -236,7 +268,7 @@ form .bottom_form-container .bookCover-container .addBookcover_input-container {
 }
 
 .priceInput-container {
-    width: 100%;
+    width: 15.2rem;
     height: 3.2rem;
     padding: 5px 10px;
 
@@ -258,6 +290,7 @@ form .bottom_form-container .bookCover-container .addBookcover_input-container {
 }
 
 input[type="date"] {
+    width: 15.2rem;
     background-image: url('../../assets/icons/calendar.svg');
     background-repeat: no-repeat;
     background-position: 95%;

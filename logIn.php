@@ -1,7 +1,6 @@
 <?php
-session_start();
+include('./config.php');
 if ($_POST) {
-    include('./config.php');
     $query = $conection->prepare("SELECT * FROM usuarios WHERE nombre_usuario = :nombre_usuario AND clave_usuario = :clave_usuario");
     $query->bindParam(':nombre_usuario', $_POST['username']);
     $query->bindParam(':clave_usuario', $_POST['key']);

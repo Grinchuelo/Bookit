@@ -1,5 +1,5 @@
 <?php 
-session_start();
+include('./config.php'); 
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +13,6 @@ session_start();
 </head>
 
 <?php 
-include('./config.php'); 
-
 $query = $conection->prepare("SELECT * FROM generos WHERE categoria_genero = 'fic'");
 $query->execute();
 $generosFic = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -27,8 +25,6 @@ $generosEsp = $query->fetchAll(PDO::FETCH_ASSOC);
 $query = $conection->prepare("SELECT * FROM generos WHERE categoria_genero = 'jei'");
 $query->execute();
 $generosJEI = $query->fetchAll(PDO::FETCH_ASSOC);
-
-
 ?>
 
 <body>

@@ -3,6 +3,32 @@ session_start();
 if (!isset($_SESSION['check'])) {
     $noAuth = true;
 } 
+
+if ($_POST) {
+    $title = (isset($_POST['nombre_libro'])) ? $_POST['nombre_libro'] : "";
+    $description = (isset($_POST['desc_libro'])) ? $_POST['desc_libro'] : "";
+    $author = (isset($_POST['nombre_autor'])) ? $_POST['nombre_autor'] : "";
+    $bookCover = (isset($_FILES['portada_libro']['name'])) ? $_FILES['portada_libro']['name'] : "";
+    $price = (isset($_POST['precio_libro'])) ? $_POST['precio_libro'] : "";
+    $publishDate = (isset($_POST['fecha_publicacion'])) ? $_POST['fecha_publicacion'] : "";
+    
+    // Establecer nombre de archivo de portada de libro unico para que no se sobreescriban
+    $fecha = new DateTime();
+    $nombreArchivo = ($bookCover != "") ? $fecha -> getTimestamp()."_".$_FILES['portada_libro']['name'] : "image.jpg";
+
+    $tmpBookCover = $_FILES['portada_libro']['tmp_name'];
+    if ($tmpBookCover != "") {
+    move_uploaded_file($tmpBookCover, "../assets/bookCovers/".$nombreArchivo);
+    }
+
+    if (isset($_FILES['portada_libro'])) {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        echo finfo_file($finfo, $_FILES['portada_libro']);
+        finfo_close($finfo);
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -45,11 +71,11 @@ if (isset($noAuth)) {
             <form action="" enctype="multipart/form-data">
                 <div class="input_label-container">
                     <label class="label_add" for="name">Título</label>
-                    <input class="input_name" placeholder="Ingresa el título del libro" type="text" name="nombre_libro" id="name">
+                    <input class="input_name" placeholder="Ingresa el título del libro" type="text" name="nombre_libro" id="name" required>
                 </div>
                 <div class="input_label-container">
                     <label class="label_add" for="desc">Descripción</label>
-                    <textarea class="input_desc" placeholder="Ingresa la descripción del libro" type="text" name="desc_libro" id="desc" maxlength="500"></textarea>
+                    <textarea class="input_desc" placeholder="Ingresa la descripción del libro" type="text" name="desc_libro" id="desc" maxlength="500" required></textarea>
                 </div>
                 <div class="input_label-container addAuthor-container">
                     <div class="biLabel">
@@ -60,7 +86,7 @@ if (isset($noAuth)) {
                         <svg>
                             <use href="../assets/icons/icons.svg?v=1#search-icon"></use>
                         </svg>
-                        <input class="input_author" placeholder="Busca el nombre del autor" type="text" name="txtnombre_autor" id="autor_nombre" autocomplete="off" onkeyup="searchAuthors()">
+                        <input class="input_author" placeholder="Busca el nombre del autor" type="text" name="nombre_autor" id="autor_nombre" autocomplete="off" onkeyup="searchAuthors()" required>
                         <div class="coinc-container"></div>
                         <script src="../scripts/searchAuthors.js"></script>
                     </div>
@@ -74,7 +100,7 @@ if (isset($noAuth)) {
                                 <use href="../assets/icons/icons.svg?v=3#image-icon"></use>
                             </svg>
                             <span class="txt">Selecciona un archivo</span>
-                            <input type="file" name="portada_libro" id="bookCover-input" accept="image/*" onchange="previewImage(event)">
+                            <input type="file" name="portada_libro" id="bookCover-input" accept="image/*" onchange="previewImage(event)" required>
                         </div>
                     </div>
                     <div class="bottom_form_right-container">
@@ -82,13 +108,17 @@ if (isset($noAuth)) {
                             <label class="label_add" for="precio_libro">Precio <span class="instruction">($ARS)</span> </label>
                             <div class="priceInput-container">
                                 <span class="price-icon">$</span>
-                                <input class="input_price" type="text" name="precio_libro" id="precio_libro" min="0" max="1000000">
+                                <input class="input_price" type="text" name="precio_libro" id="precio_libro" min="0" max="1000000" required>
                             </div>
                         </div>
                         <?php $hoy = date("Y-m-d"); ?>
                         <div class="input_label-container">
                             <label for="fecha_publicacion" class="label_add">Fecha de publicación</label>
-                            <input type="date" max="<?php echo $hoy; ?>" name="fecha_publicacion" id="fecha_publicacion">
+                            <input type="date" max="<?php echo $hoy; ?>" name="fecha_publicacion" id="fecha_publicacion" required>
+                        </div>
+                        <div class="submitForm_btn-container">
+                            <span>Asegúrate de completar todos los campos</span>
+                            <button type="submit">Agregar libro</button>
                         </div>
                     </div>
                 </div>

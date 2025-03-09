@@ -1,3 +1,11 @@
 RewriteEngine On
 
 RewriteRule ^(index|logIn|signUp|home|libro)$       $1\.php 
+
+<FilesMatch "^(\.env|\.gitignore|\.gitattributes)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+
+
