@@ -4,3 +4,7 @@ let genresList = document.querySelector('.genres-list');
 btnDropdownGenres.addEventListener('click', () => {
     genresList.classList.toggle('flex');
 })
+
+document.querySelector('.dropdown-container').addEventListener('click', () => {
+    document.querySelector('.dropdown-options').classList.toggle('flex');
+})

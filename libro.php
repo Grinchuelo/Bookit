@@ -1,5 +1,5 @@
 <?php
-session_start();
+include('./config.php');
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,6 @@ session_start();
 <body>
   <?php include('./template/header.php') ?>
   <?php
-  include('./config.php');
   $id_libro = $_GET['id_libro'];
   $query = $conection->prepare("SELECT * FROM libros WHERE id_libro = :id_libro");
   $query->bindParam(':id_libro', $id_libro);

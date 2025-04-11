@@ -1,6 +1,20 @@
 <?php
 include('./config.php');
-if ($_POST) {
+
+// Redirigir a la home si el usuario ya está logeado
+if (isset($_SESSION['check'])) {
+    header('Location:home.php');
+    die();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    $username = htmlspecialchars(trim($_POST['username']));
+    $key = htmlspecialchars(trim($_POST['key']));
+
+    require('./global/validates.php');
+
+    if(validateUsername($username)) 
+    
     $query = $conection->prepare("SELECT * FROM usuarios WHERE nombre_usuario = :nombre_usuario AND clave_usuario = :clave_usuario");
     $query->bindParam(':nombre_usuario', $_POST['username']);
     $query->bindParam(':clave_usuario', $_POST['key']);

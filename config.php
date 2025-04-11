@@ -29,14 +29,13 @@ try {
 }
 
 session_set_cookie_params([
-    "lifetime" => 10, // 1 hora de sesión
-    "path" => "/",
-    "domain" => $_SERVER['HTTP_HOST'], // Se adapta al entorno
+    "lifetime" => time() + 60*60*4, // 4 horas de sesión
+    "path" => "/", // La cookie se carga en cualquier parte del sitio
+    "domain" => $_SERVER['HTTP_HOST'], // Se adapta al entorno ya sea local o producción
     "secure" => true,  // Solo en HTTPS
-    "httponly" => true,  // No accesible desde JavaScript
+    "httponly" => true,  // No es accesible desde JavaScript (Anti-XSS)
     "samesite" => "Strict" // Protección contra CSRF
 ]);
 
 session_start();
-
 ?>

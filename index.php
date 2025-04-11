@@ -1,3 +1,12 @@
+<?php
+// Si el usuario está logeado, redirigir a la home
+session_start();
+if (isset($_SESSION['check'])) {
+    header('Location:home.php');
+    die();
+} 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

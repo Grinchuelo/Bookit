@@ -42,12 +42,36 @@ header .home {
     display: inline-block;
     text-decoration: none;
     transform: translate(-1rem, -1rem);
+
     font-size: 2.2rem;
-    color: #3783f5;
-}
-header a {
     font-weight: 800;
     height:fit-content;
+    color: #3783f5;
+}
+header .dropdown-container {
+    cursor: pointer
+}
+header .dropdown-container .dropdown-options {
+    width: 15rem;
+    height: auto;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    position: absolute;
+    top: 4rem; right: 0;
+
+    font-size: 1.5rem;
+    color: #7b7b7b;
+    border: solid 1px #dfe4eb;
+    border-radius: 1rem;
+    background-color: #fff;
+
+    display: none;
+}
+header .dropdown-container .dropdown-options a{
+    color: #7b7b7b;
 }
 
 footer {
