@@ -24,6 +24,7 @@ if ($_POST) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/generalAdmin.css">
+    <link rel="icon" href="../assets/icons/bookitLightIcon.ico" type="image/x-icon">
     <title>Ventana de administrador</title>
 </head>
 <body class="form-body">

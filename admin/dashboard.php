@@ -11,6 +11,7 @@ if (!isset($_SESSION['check'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/generalAdmin.css">
+    <link rel="icon" href="../assets/icons/bookitLightIcon.ico" type="image/x-icon">
     <title>Panel de administrador</title>
 </head>
 <?php

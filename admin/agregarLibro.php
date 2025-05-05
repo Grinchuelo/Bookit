@@ -39,6 +39,7 @@ if ($_POST) {
     <link rel="stylesheet" href="./css/generalAdmin.css">
     <link rel="stylesheet" href="./css/panels.css">
     <link rel="stylesheet" href="./css/agregar.css"> 
+    <link rel="icon" href="../assets/icons/bookitLightIcon.ico" type="image/x-icon">
 
     <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.6.0"></script>
 

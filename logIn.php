@@ -39,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     <link rel="stylesheet" href="./css/general.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/logIn-signUp.css">
+    <link rel="icon" href="./assets/icons/bookitIcon.ico" type="image/x-icon">
     <title>Bookit</title>
 </head>
 <body>

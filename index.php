@@ -14,6 +14,7 @@ if (isset($_SESSION['check'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/general.css">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="icon" href="./assets/icons/bookitIcon.ico" type="image/x-icon">
     <title>Bookit</title>
 </head>
 <body>
