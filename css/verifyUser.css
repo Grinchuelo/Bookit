@@ -108,6 +108,10 @@ form .submitBtn-container {
     width: 18rem;
     height: 4rem;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     position: relative;
 }
 form .submitBtn-container button {
@@ -121,9 +125,11 @@ form .submitBtn-container button {
 
     border: none;
     border-radius: 1rem;
+    
+    cursor: pointer;
 }
 form .submitBtn-container .errorMsg-container {
-    width: 18rem;
+    width: auto;
     height: 2.6rem;
     padding: .5rem 1rem;
 
@@ -132,21 +138,34 @@ form .submitBtn-container .errorMsg-container {
     align-items: center;
 
     position: absolute;
-    top: -4rem;
+    top: -3.7rem;
 
     background-color: #ffe2e2;
+    outline: 1px solid #E72323;
     border-radius: .5rem;
-
-    display: none;
-}
-form .submitBtn-container .errorMsg-container span {
     color: #E72323;
     font-size: 16px;
     font-weight: 300;
+
+    opacity: 0;
 }
+form .submitBtn-container .errorMsg-container span {
+    width: max-content;
+}
+.successMsg-container {
+    background-color: #E2FFE5 !important;
+    outline: 1px solid #00BF63 !important;
+    color: #00BF63 !important;
+}
+/* form .submitBtn-container .errorMsg-container span {
+    color: #E72323;
+    font-size: 16px;
+    font-weight: 300;
+} */
 
 .advice-container {
     width: 100%;
+    max-width: 35rem;
     height: auto;
     padding: 1rem;
 
@@ -160,3 +179,15 @@ form .submitBtn-container .errorMsg-container span {
     color: #7b7b7b;
 }
 
+
+@keyframes appear {
+    20% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

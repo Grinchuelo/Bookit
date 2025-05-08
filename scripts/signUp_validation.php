@@ -16,7 +16,7 @@ $date = date("Y-m-d H:i:s");                                           //
 $token =  bin2hex(random_bytes(32));                                   //
 
 // Si ya existe una cuenta con ese nombre de usuario, devolver error
-$stmt = $conection->prepare("SELECT * FROM usuarios WHERE nombre_usuario = ?");
+$stmt = $conection->prepare("SELECT * FROM usuarios WHERE nombre_usuario = ? AND verificado = 1");
 $stmt->execute([$username]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -24,7 +24,7 @@ if (!empty($user)) {
     ob_clean();
     echo json_encode([
         'success' => false,
-        'message' => 'El nombre de usuario ya está en uso.',
+        'message' => 'El nombre de usuario ya está en uso',
         'inputError' => 'username'
     ]);
     exit;
@@ -36,7 +36,7 @@ if (validateEmail($email) && validateUsername($username) && validatePassword($pa
         ob_clean();
         echo json_encode([
             'success' => true,
-            'message' => 'Todos los campos se llenaron correctamente.',
+            'message' => 'Todos los campos se llenaron correctamente',
             'inputError' => ''
         ]);
 
@@ -49,7 +49,7 @@ if (validateEmail($email) && validateUsername($username) && validatePassword($pa
         ob_clean();
         echo json_encode([
             'success' => false,
-            'message' => 'Asegurate de completar todos los campos correctamente.',
+            'message' => 'Asegurate de completar todos los campos correctamente',
             'inputError' => ''
         ]);
         exit;

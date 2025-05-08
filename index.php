@@ -1,6 +1,12 @@
 <?php
 // Si el usuario está logeado, redirigir a la home
 session_start();
+
+if (isset($_SESSION['isAdmin'])) {
+    if ($_SESSION['isAdmin']) {
+        session_destroy();
+    }
+}
 if (isset($_SESSION['check'])) {
     header('Location:home.php');
     die();
@@ -18,18 +24,25 @@ if (isset($_SESSION['check'])) {
     <title>Bookit</title>
 </head>
 <body>
-    <div class="main-container">
+    <div class="indexMain-container">
         <div class="sub-container">
-            <div class="welcome-title">
-                <h1>Bienvenido a <span class="underline">Bookit</span></h1>
-            </div>
-            <div class="sign-container">
-                <p>¿Todavía no tienes una cuenta?</p>
-                <a href="./signUp.php">Regístrate</a>               
-            </div>
-            <div class="sign-container">
-                <p>¿Ya tienes una cuenta?</p>
-                <a href="./logIn.php">Iniciar sesión</a>
+            <div class="sub-sub-container">
+                <div class="welcome-title">
+                    <h1>Bienvenido a</h1>
+                    <svg>
+                        <use href="./assets/icons/icons.svg#bookitFullLight-icon"></use>
+                    </svg>
+                </div>
+                <div class="signs-container">
+                    <div class="sign-container">
+                        <p>¿Todavía no tenés una cuenta?</p>
+                        <a href="./signUp.php">REGISTRATE</a>               
+                    </div>
+                    <div class="sign-container">
+                        <p>¿Ya tenés una cuenta?</p>
+                        <a href="./logIn.php">INICIÁ SESIÓN</a>
+                    </div>
+                </div>
             </div>
             <a href="./home.php" class="withoutLogin">Continuar sin iniciar sesión</a>
         </div>

@@ -48,10 +48,27 @@ header .home {
     height:fit-content;
     color: #3783f5;
 }
-header .dropdown-container {
+header .right-container {
+    display: flex;
+    align-items: flex-start;
+}
+header .right-container .username-container {
+    height: 100%;
+
+    display: flex;
+    align-items: flex-start;
+}
+header .right-container .username-container .headerUsername {
+    font-size: 16px;
+    font-weight: 700;
+    color: #3783f5;
+
+    transform: translateY(0.5rem);
+}
+header .right-container .dropdown-container {
     cursor: pointer
 }
-header .dropdown-container .dropdown-options {
+header .right-container .dropdown-container .dropdown-options {
     width: 15rem;
     height: auto;
     padding: 1rem;
@@ -67,11 +84,9 @@ header .dropdown-container .dropdown-options {
     border: solid 1px #dfe4eb;
     border-radius: 1rem;
     background-color: #fff;
-
-    display: none;
 }
-header .dropdown-container .dropdown-options a{
-    color: #7b7b7b;
+header .right-container .dropdown-container .dropdown-options a {
+    color: #3783f5;
 }
 
 footer {

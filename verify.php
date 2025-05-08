@@ -14,15 +14,12 @@ $token = $_GET['token'] ?? null;
 </head>
 <body>
     <?php
-
-
-        if (0 == 1) { 
-    /* if ($token) {
+    if ($token) {
         $stmt = $conection->prepare("SELECT * FROM usuarios WHERE token_verificacion = ?");
         $stmt->execute([$token]);
-        $user = $stmt->fetch();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
-        if (empty($user)) { */
+        if (empty($user)) { 
     ?>
     <main>
         <div class="title-container">
@@ -32,19 +29,18 @@ $token = $_GET['token'] ?? null;
             <h2>El token expiró</h2>
         </div>
         <div class="instructions">
-            <span>Intenta registrándote nuevamente</span>
+            <span>Intentá registrándote nuevamente</span>
         </div>
     </main>
     <?php
             die();
-        } else {
+        } 
+    }
             /* $stmt = $conection->prepare("UPDATE usuarios SET verificado = 1, token_verificacion = NULL WHERE id_usuario = ?");
             $stmt->execute([$user['id_usuario']]);
-            session_start();
     
             $_SESSION['check'] = "OK";
-            $_SESSION['username'] = $user['nombre_usuario']; */
-        }
+            $_SESSION['username'] = $user['nombre_usuario'];  */
     ?>
     <main>
         <div class="title-container">
@@ -55,18 +51,18 @@ $token = $_GET['token'] ?? null;
             <div class="inputs-container">
                 <div class="usernameField-container">
                     <label for="usernameInput">Nombre de usuario</label>
-                    <input type="text" name="username" id="usernameInput" maxlength="20" required>
+                    <input type="text" name="username" id="usernameInput" maxlength="20">
                 </div>
                 <div class="passwordField-container">
                     <label for="passwordInput">Contraseña</label>
-                    <input type="password" name="password" id="passwordInput" maxlength="50" required>
+                    <input type="password" name="password" id="passwordInput" maxlength="50">
                 </div>
             </div>
 
             <div class="submitBtn-container">
-                <button id="submitBtn" type="button">VALIDAR</button>
-                <div class="errorMsg-container">
-                    <span>Los datos no coinciden</span>
+                <button id="submitBtn" type="submit">VERIFICAR</button>
+                <div id="msg-container" class="msg-container errorMsg-container">
+                    <span></span>
                 </div>
             </div>
         </form>
@@ -75,5 +71,7 @@ $token = $_GET['token'] ?? null;
             <p>Si vos no generaste este registro podés simplemente ignorar esto.<br><br>Tu dirección no será asociada a ninguna cuenta y no tomaremos ninguna acción sin tu confirmación.</p>
         </div>
     </main>
+
+    <script src="./scripts/verifyUser.js" defer></script>
 </body>
 </html>

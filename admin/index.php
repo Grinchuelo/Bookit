@@ -11,6 +11,7 @@ if ($_POST) {
     if (!empty($administrador)) {
         $_SESSION['check'] = "OK";
         $_SESSION['username'] = $administrador['nombre_admin'];
+        $_SESSION['isAdmin'] = true;
         header('Location:dashboard.php');
     } else {
         $mensaje = "ERROR: nombre de administrador o contraseña incorrectos";

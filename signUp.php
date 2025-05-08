@@ -13,16 +13,16 @@
 <body>
     <div class="main-container">
         <div class="title-container">
-            <h1>Regístrate</h1>
+            <h1>Registrate</h1>
         </div>
         <div class="form-container">
             <form method="POST" id="registerUser-form">
                 <div class="labelInput-container email-container">
                     <label for="emailInput">Correo electrónico</label>
-                    <div class="input-container">
+                    <div class="input-container emailInput-container">
                         <input type="email" name="email" id="emailInput" class="emailInput noValidateIcon" placeholder="Ingrese su correo electrónico" maxlength="50" required onblur="fillInput(this)">
                         <div class="svg-container">
-                            <svg class="noPointerEvents" onclick="displayRequirements(event, this)">
+                            <svg class="noPointerEvents" id="validationEmailSvg" onclick="displayRequirements(event, this)">
                                 <use id="validationSvg" href=""></use>
                             </svg>
                             <div class="requirements-container">
@@ -145,52 +145,17 @@
                     <div class="errorSubmitMessage">
                         <span id="errorMsg">Asegurate de completar todos los campos correctamente</span>
                     </div>
-                    <p>¿Ya tienes una cuenta? <a href="./logIn.php">Inicia sesión</a></p>
+                    <p>¿Ya tenés una cuenta? <a href="./logIn.php" style="font-weight:500;">Iniciá sesión</a></p>
                 </div>
             </form>
         </div>
     </div>
 
     <div class="confirmEmailModal">
-        <div class="confirmEmailModal_msgContainer">
-            <div class="closeModal" onclick="closeModal(this)">
-                <svg>
-                    <use href="./assets/icons/icons.svg?v=3#grayCross-icon"></use>
-                </svg>
-            </div>
-            <h2>¡Tu historia en <span class="blueBold">Bookit</span> está por empezar!</h2>
-            <hr> <!-- -------------------------------- -->
-            <div class="mainMsg-container">
-                <div class="subMainMsg-container">
-                    <div class="msg2">
-                        <span>📝Estamos escribiendo tu correo. Esto puede tardar unos segundos...</span>
-                    </div>
-                </div>
-                <svg class="loadingSvg">
-                    <use href="./assets/icons/icons.svg?v=1#loading-icon"></use>
-                </svg>
-                <!-- <svg class="mailSentSvg">
-                    <use href="./assets/icons/icons.svg#mailSent-icon"></use>
-                </svg>
-                <div class="subMainMsg-container">
-                    <div class="msg1">
-                        <span>Acabamos de enviarte un correo a <span class="greenColorFont emailSentTo"></span></span>
-                    </div>
-                    <div class="msg2">
-                        <span>Revisá tu bandeja de entrada (y la de spam, por las dudas) y seguí las instrucciones.</span>
-                    </div>
-                </div> -->
-            </div>
-            <!-- <div class="bottomOptions">
-                <div class="subBottomOptions">
-                    <span>¿No te llegó?</span>
-                    <div class="btnResend-container">
-                        <span class="timeToResend"><span class="seconds">30</span>s</span>
-                        <button type="button" class="btnResend">Reenviar</button>
-                    </div>
-                </div>
-            </div> -->
-
+        <div class="confirmEmailModal_msgContainer_loading" id="confirmEmail-container">
+            <svg class="loadingSvg">
+                <use href="./assets/icons/icons.svg?v=1#loading-icon"></use>
+            </svg>
         </div>
     </div>
 

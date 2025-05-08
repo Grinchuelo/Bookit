@@ -112,7 +112,10 @@ if (isset($noAuth)) {
                                 <input class="input_price" type="text" name="precio_libro" id="precio_libro" min="0" max="1000000" required>
                             </div>
                         </div>
-                        <?php $hoy = date("Y-m-d"); ?>
+                        <?php 
+                        date_default_timezone_set('America/Argentina/Cordoba');
+                        $hoy = date("Y-m-d"); 
+                        ?>
                         <div class="input_label-container">
                             <label for="fecha_publicacion" class="label_add">Fecha de publicación</label>
                             <input type="date" max="<?php echo $hoy; ?>" name="fecha_publicacion" id="fecha_publicacion" required>

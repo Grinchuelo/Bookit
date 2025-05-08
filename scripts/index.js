@@ -25,6 +25,10 @@ function successFormatInput(inputElement, inputContainer, requirementsContainer,
             eyeIcon.setAttribute('href', `./assets/icons/icons.svg#${eyeColor}Eye-icon`);
         }
     }
+    if (inputElement.classList.contains('emailInput')) {
+        const validationEmailSvg = document.getElementById('validationEmailSvg');
+        validationEmailSvg.removeAttribute('onclick');
+    }
 
     validateAllInputs();
 }
@@ -40,6 +44,10 @@ function errorFormatInput(inputContainer, requirementsContainer, svg) {
             }
         })
         requirementsContainer.classList.add('display');
+    }
+    if (inputContainer.classList.contains('emailInput-container')) {
+        const validationEmailSvg = document.getElementById('validationEmailSvg');
+        validationEmailSvg.setAttribute('onclick', 'displayRequirements(event, this)');
     }
 }
 
@@ -381,7 +389,7 @@ function displayMessage(btnSubmit) {
     if (btnSubmit.getAttribute('type') == "button") {
         let errorSubmitMessage = document.querySelector('.errorSubmitMessage');
 
-        errorSubmitMessage.textContent = "Asegurate de completar todos los campos correctamente";
+        errorSubmitMessage.firstElementChild.textContent = "Asegurate de completar todos los campos correctamente";
         errorSubmitMessage.style.animation = 'none';  // Resetea
         void errorSubmitMessage.offsetWidth; // Fuerza reflow
         errorSubmitMessage.style.animation = "appear 5s ease"; // Vuelve a aplicar
@@ -442,8 +450,23 @@ function closeModal(element) {
     btnSubmit.style.disabled = "false";
     modal.style.display = "none";
 
+    let confirmEmailHTML_loading = `<div class="confirmEmailModal_msgContainer_loading" id="confirmEmail-container">
+                                        <svg class="loadingSvg">
+                                            <use href="./assets/icons/icons.svg?v=1#loading-icon"></use>
+                                        </svg>
+                                    </div>`
+
+    const confirmEmailModalContainer = document.querySelector('.confirmEmailModal');
+    const confirmEmailContainer = document.getElementById('confirmEmail-container');
+    confirmEmailContainer.remove();
+    confirmEmailModalContainer.insertAdjacentHTML('beforeend', confirmEmailHTML_loading);
+    if (confirmEmailContainer.classList.contains('confirmEmailModal_msgContainer')) {
+        confirmEmailContainer.classList.remove('confirmEmailModal_msgContainer');
+        confirmEmailContainer.classList.add('confirmEmailModal_msgContainer_loading');
+    }
+
     // Esto es para resetear el estilo del modal y que no aparezca el mail anterior
-    let modalReset = '<div class="subMainMsg-container"><div class="msg2"><span>📝Estamos escribiendo tu correo. Esto puede tardar unos segundos...</span></div></div><svg class="loadingSvg"><use href="./assets/icons/icons.svg?v=1#loading-icon"></use></svg>';
+    /* let modalReset = '<div class="subMainMsg-container"><div class="msg2"><span>📝Estamos escribiendo tu correo. Esto puede tardar unos segundos...</span></div></div><svg class="loadingSvg"><use href="./assets/icons/icons.svg?v=1#loading-icon"></use></svg>';
     const mainMsg_container = document.querySelector('.mainMsg-container');
     const confirmEmailModal_msgContainer = document.querySelector('.confirmEmailModal_msgContainer');
 
@@ -452,12 +475,38 @@ function closeModal(element) {
     }
     confirmEmailModal_msgContainer.lastChild.remove();
 
-    mainMsg_container.insertAdjacentHTML('beforeend', modalReset);
+    mainMsg_container.insertAdjacentHTML('beforeend', modalReset); */
+}
+
+function resendEmail(btnResend) {
+    btnResend.style.backgroundColor = "#E5E5E5";
+    btnResend.style.color = "#ABABAB";
+    btnResend.setAttribute('disabled', '');
+    btnResend.removeAttribute('onclick');
+
+    const form = document.querySelector('form');
+    const formData = new FormData(form);
+    let result;
+
+    fetch('./scripts/signUp_validation.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        result = data;
+    })
+    .catch(error => {
+        console.error('Error: ', error);
+    })
+
+    activeChronometer();
 }
 
 function activeChronometer() {
     let chronometer = document.querySelector('.seconds');
     chronometer.textContent = "30"; // Inicializamos al cronómetro en 30 segundos
+    ejecutions = 0;
 
     intervalId = setInterval(function() {
         if (ejecutions === 30) {    // Si ya se ejecutó 30 veces significa que ya llegó a 0 segundos
@@ -473,6 +522,14 @@ function subtract(chronometer) {
     let value = parseInt(chronometer.textContent);
     value--;
     chronometer.textContent = value.toString();
+
+    if (chronometer.textContent == "0") {
+        const btnResend = document.querySelector('.btnResend');
+        btnResend.style.backgroundColor = "#00BF63";
+        btnResend.style.color = "#FFF";
+        btnResend.removeAttribute('disabled');
+        btnResend.setAttribute('onclick', 'resendEmail(this)');
+    }
 }
 
 // Al enviar el formulario
@@ -483,8 +540,6 @@ document.getElementById('registerUser-form').addEventListener('submit', async fu
     const btnSubmit = document.getElementById('submitBtn');
     btnSubmit.style.disabled = "true";
     confirmEmailModal.style.display = "flex"; // Mostrar el modal si ocurrió el envío del email    
-    document.querySelector('.subMainMsg-container').remove();
-    document.querySelector('.loadingSvg').remove();
     
     const form = e.target;
     const formData = new FormData(form);
@@ -507,6 +562,7 @@ document.getElementById('registerUser-form').addEventListener('submit', async fu
         let svg = document.getElementById('usernameSvg');
         inputContainer.style.borderBottom = "solid 2px #E72323";
         svg.setAttribute('href', './assets/icons/icons.svg#redError-icon');
+        confirmEmailModal.style.display = "none";
     }
     if (!result.success) {
         let errorSubmitMessage = document.querySelector('.errorSubmitMessage');
@@ -519,14 +575,45 @@ document.getElementById('registerUser-form').addEventListener('submit', async fu
     } else {
         // Acá cambiamos el contenido del modal y le decimos al usuario que
         // revise su correo 
-        let confirmEmailMainHTML = '<svg class="mailSentSvg"><use href="./assets/icons/icons.svg#mailSent-icon"></use></svg><div class="subMainMsg-container"><div class="msg1"><span>Acabamos de enviarte un correo a <span class="greenColorFont emailSentTo"></span></span></div><div class="msg2"><span>Revisá tu bandeja de entrada (y la de spam, por las dudas) y seguí las instrucciones.</span></div></div>';
-        let confirmEmailBottomHTML = '<div class="bottomOptions"><div class="subBottomOptions"><span>¿No te llegó?</span><div class="btnResend-container"><span class="timeToResend"><span class="seconds">30</span>s</span><button type="button" class="btnResend">Reenviar</button></div></div></div>';
-        const mainMsg_container = document.querySelector('.mainMsg-container');
-        const confirmEmailModal_msgContainer = document.querySelector('.confirmEmailModal_msgContainer');
-
-        mainMsg_container.style.gap = "0";
-        mainMsg_container.insertAdjacentHTML('beforeend', confirmEmailMainHTML);
-        confirmEmailModal_msgContainer.insertAdjacentHTML('beforeend', confirmEmailBottomHTML);
+        let confirmEmailHTML =  `<div class="confirmEmailModal_msgContainer" id="confirmEmail-container">
+                                    <div class="closeModal" onclick="closeModal(this)">
+                                        <svg>
+                                            <use href="./assets/icons/icons.svg?v=3#grayCross-icon"></use>
+                                        </svg>
+                                    </div>
+                                    <h2>¡Tu historia en <span class="blueBold">Bookit</span> está por empezar!</h2>
+                                    <hr> <!-- -------------------------------- -->
+                                    <div class="mainMsg-container">
+                                        <svg class="mailSentSvg">
+                                            <use href="./assets/icons/icons.svg#mailSent-icon"></use>
+                                        </svg>
+                                        <div class="subMainMsg-container">
+                                            <div class="msg1">
+                                                <span>Acabamos de enviarte un correo a <span class="greenColorFont emailSentTo"></span></span>
+                                            </div>
+                                            <div class="msg2">
+                                                <span>Revisá tu bandeja de entrada (y la de spam, por las dudas) y seguí las instrucciones.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bottomOptions">
+                                        <div class="subBottomOptions">
+                                            <span>¿No te llegó?</span>
+                                            <div class="btnResend-container">
+                                                <span class="timeToResend"><span class="seconds">30</span>s</span>
+                                                <button type="button" class="btnResend" disabled>Reenviar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+        const confirmEmailModalContainer = document.querySelector('.confirmEmailModal');
+        const confirmEmailContainer = document.getElementById('confirmEmail-container');
+        confirmEmailContainer.remove();
+        confirmEmailModalContainer.insertAdjacentHTML('beforeend', confirmEmailHTML);
+        if (confirmEmailContainer.classList.contains('confirmEmailModal_msgContainer_loading')) {
+            confirmEmailContainer.classList.remove('confirmEmailModal_msgContainer_loading');
+            confirmEmailContainer.classList.add('confirmEmailModal_msgContainer');
+        }
 
         let confirmEmailModal = document.querySelector('.confirmEmailModal');
         const email = document.getElementById('emailInput').value;

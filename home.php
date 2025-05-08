@@ -3,7 +3,7 @@ include('./config.php');
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -12,25 +12,11 @@ include('./config.php');
   <link rel="icon" href="./assets/icons/bookitIcon.ico" type="image/x-icon">
   <title>Bookit</title>
 </head>
-
-<?php 
-$query = $conection->prepare("SELECT * FROM generos WHERE categoria_genero = 'fic'");
-$query->execute();
-$generosFic = $query->fetchAll(PDO::FETCH_ASSOC);
-$query = $conection->prepare("SELECT * FROM generos WHERE categoria_genero = 'nfic'");
-$query->execute();
-$generosNFic = $query->fetchAll(PDO::FETCH_ASSOC);
-$query = $conection->prepare("SELECT * FROM generos WHERE categoria_genero = 'esp'");
-$query->execute();
-$generosEsp = $query->fetchAll(PDO::FETCH_ASSOC);
-$query = $conection->prepare("SELECT * FROM generos WHERE categoria_genero = 'jei'");
-$query->execute();
-$generosJEI = $query->fetchAll(PDO::FETCH_ASSOC);
-?>
-
 <body>
-  
-  <?php include('./template/header.php') ?>
+
+  <?php 
+  /* print_r($_SESSION); */
+  include('./template/header.php') ?>
   <menu>
     <input type="text" name="" id="" placeholder="Buscar un libro...">
     <div class="dropdown-genres">
@@ -98,7 +84,7 @@ $generosJEI = $query->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <a href="libro.php?id_libro=<?php echo $libro['id_libro'] ?>" class="card" title="<?php echo $libro['nombre_libro']; ?>">
           <div class="bookCover-container">
-            <img src="./assets/bookCovers/<?php echo $libro['portada_libro']; ?>.avif" alt="">
+            <img src="https://bookit-assets.s3.us-east-2.amazonaws.com/bookCovers/<?php echo $libro['portada_libro'];?>.avif" alt="">
           </div>
           <div class="info-container">
             <div class="title-container">
@@ -145,7 +131,7 @@ $generosJEI = $query->fetchAll(PDO::FETCH_ASSOC);
         ?>
         <div class="card" title="<?php echo $libro['nombre_libro']; ?>">
           <div class="bookCover-container">
-            <img src="./assets/bookCovers/<?php echo $libro['portada_libro']; ?>.avif" alt="">
+            <img src="https://bookit-assets.s3.us-east-2.amazonaws.com/bookCovers/<?php echo $libro['portada_libro']; ?>.avif" alt="">
           </div>
           <div class="info-container">
             <div class="title-container">
@@ -170,5 +156,5 @@ $generosJEI = $query->fetchAll(PDO::FETCH_ASSOC);
     </div>
   </main>
 
-  <script src="./scripts/index.js"></script>
+  <script src="./scripts/general.js"></script>
 <?php include('./template/footer.php'); ?>
