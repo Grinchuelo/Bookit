@@ -17,7 +17,7 @@ if ($local) {
     $host = $_ENV['DB_HOST'];  
     $bd = $_ENV['DB_NAME'];
     $usuario = $_ENV['DB_USER'];  
-    $contrasenia = $_ENV['PROTECTEDbyBFG'];  
+    $contrasenia = $_ENV['DB_PASSWORD'];  
 }
 
 try {
