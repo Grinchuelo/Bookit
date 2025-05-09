@@ -14,10 +14,10 @@ if ($local) {
     $contrasenia = $_ENV['LOCAL_PASSWORD'];
 } else {
     // Configuración para DonWeb
-    $host = $_ENV['HOST'];  
-    $bd = $_ENV['DATABASE'];
-    $usuario = $_ENV['USER'];  
-    $contrasenia = $_ENV['PASSWORD'];  
+    $host = $_ENV['DB_HOST'];  
+    $bd = $_ENV['DB_NAME'];
+    $usuario = $_ENV['DB_USER'];  
+    $contrasenia = $_ENV['PROTECTEDbyBFG'];  
 }
 
 try {
