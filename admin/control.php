@@ -1,7 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['check'])) {
-    $noAuth = true;
+if (isset($_SESSION['isAdmin'])) {
+    if (!$_SESSION['isAdmin']) {
+        $noAuth = true;
+    }
 } 
 ?>
 
@@ -10,6 +12,7 @@ if (!isset($_SESSION['check'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="./css/generalAdmin.css">
     <link rel="stylesheet" href="./css/panels.css">
     <link rel="icon" href="../assets/icons/bookitLightIcon.ico" type="image/x-icon">
@@ -30,7 +33,7 @@ if ($noAuth) {
             </svg>
         </a>
         <h2>LIBROS</h2>
-        <a href="./logout.php">
+        <a href="../global/logout.php">
             <svg>
                 <use href="../assets/icons/icons.svg?v=2#logout-icon"></use>
             </svg>

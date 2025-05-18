@@ -4,15 +4,12 @@ const coinc_container = document.querySelector('.coinc-container');
 
 function filter() {
     let query = (document.querySelector('.input_author').value).trim();
-    
-    if (query.length == 0) {
-        coinc_container.style.display = "none";
-        return;
-    } else if (query.length == 1) {
+
+    if (query.length < 2) {
         coinc_container.style.display = "none";
         return;
     } else if (query.length >= 2) {
-        fetch(`getAuthors.php?query=${encodeURIComponent(query)}`)
+        fetch(`./scripts/php/getAuthors.php?query=${encodeURIComponent(query)}`)
         .then(res => res.json())
         .then(data => {
             displayResults(data);

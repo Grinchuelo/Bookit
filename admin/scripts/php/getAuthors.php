@@ -1,7 +1,6 @@
 <?php
-include('../config.php');
-
 header('Content-Type: application/json');
+include('../../../config.php');
 
 $inputQuery = trim($_GET['query']);
 
@@ -13,5 +12,6 @@ $query->bindValue(':thirdCondition', '%'.$inputQuery.'%', PDO::PARAM_STR);
 $query->execute();
 $autores = $query->fetchAll(PDO::FETCH_ASSOC);
 
+ob_clean();
 echo json_encode($autores); // JSON_UNESCAPED_UNICODE admite caracteres especiales como acentos y demás
 ?>

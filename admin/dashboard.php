@@ -1,7 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['check'])) {
-    $noAuth = true;
+if (isset($_SESSION['isAdmin'])) {
+    if (!$_SESSION['isAdmin']) {
+        $noAuth = true;
+    }
 } 
 ?>
 
@@ -10,6 +12,7 @@ if (!isset($_SESSION['check'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="./css/generalAdmin.css">
     <link rel="icon" href="../assets/icons/bookitLightIcon.ico" type="image/x-icon">
     <title>Panel de administrador</title>
@@ -23,7 +26,7 @@ if ($noAuth) {
 ?>
 <body>
     <header>
-        <a href="./logout.php">
+        <a href="../global/logout.php">
             <svg>
                 <use href="../assets/icons/icons.svg#logout-icon"></use>
             </svg>

@@ -3,8 +3,8 @@
 session_start();
 
 if (isset($_SESSION['isAdmin'])) {
-    if ($_SESSION['isAdmin']) {
-        session_destroy();
+    if ($_SESSION['isAdmin'] == true) {
+        $_SESSION = array();
     }
 }
 if (isset($_SESSION['check'])) {
@@ -18,10 +18,20 @@ if (isset($_SESSION['check'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/general.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="./assets/icons/bookitIcon.ico" type="image/x-icon">
     <title>Bookit</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+        * {
+            font-family: 'Outfit';
+        }
+    </style>
+
 </head>
 <body>
     <div class="indexMain-container">

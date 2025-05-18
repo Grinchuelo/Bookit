@@ -9,8 +9,8 @@
             }
             ?></span>
         </div>
-        <div id="dropdown-container" class="dropdown-container" onclick="dropdownOptions(this)">
-            <svg class="icon book">
+        <div id="dropdown-container" class="dropdown-container" onclick="dropdownOptions()">
+            <svg id="clickToDropdown" class="icon book">
                 <use href="./assets/icons/icons.svg#bookUser-icon"></use>
             </svg>
             <div class="dropdown-options" style="display: none">

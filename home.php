@@ -1,13 +1,10 @@
-<?php 
-include('./config.php');
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/fonts.css">
   <link rel="stylesheet" href="./css/general.css">
   <link rel="icon" href="./assets/icons/bookitIcon.ico" type="image/x-icon">
   <title>Bookit</title>
@@ -15,7 +12,14 @@ include('./config.php');
 <body>
 
   <?php 
-  /* print_r($_SESSION); */
+  include('./config.php');
+
+  if (isset($_SESSION['isAdmin'])) {
+    if ($_SESSION['isAdmin'] == true) {
+      $_SESSION = array();
+    }
+  }
+
   include('./template/header.php') ?>
   <menu>
     <input type="text" name="" id="" placeholder="Buscar un libro...">
@@ -82,12 +86,12 @@ include('./config.php');
         <?php
         foreach ($masBuscados as $libro) {
         ?>
-        <a href="libro.php?id_libro=<?php echo $libro['id_libro'] ?>" class="card" title="<?php echo $libro['nombre_libro']; ?>">
+        <a href="libro.php?id_libro=<?php echo $libro['id_libro'] ?>" class="card">
           <div class="bookCover-container">
             <img src="https://bookit-assets.s3.us-east-2.amazonaws.com/bookCovers/<?php echo $libro['portada_libro'];?>.avif" alt="">
           </div>
           <div class="info-container">
-            <div class="title-container">
+            <div class="title-container" title="<?php echo $libro['nombre_libro']; ?>">
               <h3><?php echo $libro['nombre_libro']; ?></h3>
             </div> 
             <div class="priceAndStars-container">
@@ -129,12 +133,12 @@ include('./config.php');
         <?php
         foreach ($masLikeados as $libro) {
         ?>
-        <div class="card" title="<?php echo $libro['nombre_libro']; ?>">
+        <div class="card">
           <div class="bookCover-container">
             <img src="https://bookit-assets.s3.us-east-2.amazonaws.com/bookCovers/<?php echo $libro['portada_libro']; ?>.avif" alt="">
           </div>
           <div class="info-container">
-            <div class="title-container">
+            <div class="title-container" title="<?php echo $libro['nombre_libro']; ?>">
               <h3><?php echo $libro['nombre_libro']; ?></h3>
             </div> 
             <div class="priceAndStars-container">
@@ -154,6 +158,18 @@ include('./config.php');
         </div>
       </div>
     </div>
+            <!--AGREGAR SÓLO EN VISTA DE PC-->
+      <!-- <button class="scroll-btn left-btn">
+        <svg>
+          <use href="./assets/icons/icons.svg#arrowLeft-icon"></use>
+        </svg>
+      </button>
+      <button class="scroll-btn right-btn">
+        <svg>
+          <use href="./assets/icons/icons.svg#arrowRight-icon"></use>
+        </svg>
+      </button> -->
+      
   </main>
 
   <script src="./scripts/general.js"></script>

@@ -1,7 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['check'])) {
-    $noAuth = true;
+if (isset($_SESSION['isAdmin'])) {
+    if (!$_SESSION['isAdmin']) {
+        $noAuth = true;
+    }
 } 
 
 if ($_POST) {
@@ -36,6 +38,7 @@ if ($_POST) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="./css/generalAdmin.css">
     <link rel="stylesheet" href="./css/panels.css">
     <link rel="stylesheet" href="./css/agregar.css"> 
@@ -89,7 +92,7 @@ if (isset($noAuth)) {
                         </svg>
                         <input class="input_author" placeholder="Busca el nombre del autor" type="text" name="nombre_autor" id="autor_nombre" autocomplete="off" onkeyup="searchAuthors()" required>
                         <div class="coinc-container"></div>
-                        <script src="../scripts/searchAuthors.js"></script>
+                        <script src="./scripts/js/searchAuthors.js"></script>
                     </div>
                 </div>
                 <div class="bottom_form-container">
@@ -133,8 +136,8 @@ if (isset($noAuth)) {
         </div>  
     </main>
 
-    <script src="../scripts/formatPriceInput.js"></script>
-    <script src="../scripts/previewImage.js"></script>
+    <script src="./scripts/js/formatPriceInput.js"></script>
+    <script src="./scripts/js/previewImage.js"></script>
     <!-- <script>
         let area = document.querySelector(".input_desc")
         

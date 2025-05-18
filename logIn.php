@@ -1,6 +1,12 @@
 <?php
 include('./config.php');
 
+if (isset($_SESSION['isAdmin'])) {
+    if ($_SESSION['isAdmin'] == true) {
+        $_SESSION = array();
+    }
+}
+
 // Redirigir a la home si el usuario ya está logeado
 if (isset($_SESSION['check'])) {
     header('Location:home.php');
@@ -13,6 +19,7 @@ if (isset($_SESSION['check'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/general.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="./assets/icons/bookitIcon.ico" type="image/x-icon">
@@ -47,7 +54,7 @@ if (isset($_SESSION['check'])) {
                 </div>
                 <div class="submitBtn-container">
                     <button id="submitBtn" type="submit">INICIAR SESIÓN</button>
-                    <p>¿No tenés una cuenta? <a href="./signUp.php" style="font-weight: 500;">Registrate</a></p>
+                    <p>¿No tenés una cuenta? <a href="./signUp.php">Registrate</a></p>
                     <div id="errorMsg-container" class="errorMsg-container">
                         <span>Nombre de usuario o contraseña incorrectos</span>
                     </div>

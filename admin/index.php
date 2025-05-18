@@ -1,29 +1,16 @@
 <?php
-session_start();
-if ($_POST) {
-    include('../config.php');
-    $query = $conection->prepare("SELECT * FROM administradores WHERE nombre_admin=:nombre_admin AND clave_admin=:clave_admin");
-    $query->bindParam(':nombre_admin', $_POST['username']);
-    $query->bindParam(':clave_admin', $_POST['key']);
-    $query->execute();
-    $administrador = $query->fetch(PDO::FETCH_LAZY);
-
-    if (!empty($administrador)) {
-        $_SESSION['check'] = "OK";
-        $_SESSION['username'] = $administrador['nombre_admin'];
-        $_SESSION['isAdmin'] = true;
-        header('Location:dashboard.php');
-    } else {
-        $mensaje = "ERROR: nombre de administrador o contraseña incorrectos";
-    }
+require('../config.php');
+if (isset($_SESSION['check'])) {
+    $_SESSION = array();
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="./css/generalAdmin.css">
     <link rel="icon" href="../assets/icons/bookitLightIcon.ico" type="image/x-icon">
     <title>Ventana de administrador</title>
@@ -36,19 +23,17 @@ if ($_POST) {
                     <use href="../assets/icons/icons.svg#admin-icon"></use>
                 </svg>
             </div>
-            <?php if(isset($mensaje)) { ?>
             <div class="error-container">
-                <span><?php echo $mensaje; ?></span>
+                <span></span>
             </div>
-            <?php } ?>
-            <form method="POST">
+            <form action="" method="POST">
                 <div class="username-container input-container">
                     <label>Nombre de administrador</label>
-                    <input type="text" name="username" id="username" maxlength="20" required>
+                    <input type="text" name="admin_name" id="username" maxlength="20">
                 </div>
                 <div class="key-container input-container">
                     <label>Contraseña</label>
-                    <input type="password" name="key" id="password" maxlength="50" required>
+                    <input type="password" name="admin_password" id="password" maxlength="50">
                 </div>
                 <div class="btn-container">
                     <button type="submit">INGRESAR</button>
@@ -56,5 +41,7 @@ if ($_POST) {
             </form>
         </div>
     </div>
+
+    <script src="./scripts/js/index.js"></script>
 </body>
 </html>

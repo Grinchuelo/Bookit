@@ -132,6 +132,7 @@
 .buttons {
     width: 100%;
     height: 6rem;
+    max-width: 42.7rem;
 
     display: flex;
     gap: 1rem;
