@@ -34,6 +34,7 @@ if (empty($admin)) {
 
     $_SESSION['check'] = 'OK';
     $_SESSION['username'] = $admin_name;
+    $_SESSION['user_id'] = $admin['id_admin'];
     $_SESSION['isAdmin'] = true;
 }
 ?>

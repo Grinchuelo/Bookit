@@ -3,7 +3,7 @@ const errorMsgContainer = document.getElementById('errorMsg-container');
 function displayErrorMsg(errorMsg) {
     errorMsgContainer.firstElementChild.textContent = errorMsg;
     errorMsgContainer.style.animation = 'none';  // Resetea
-    void errorMsgContainer.offsetWidth; // Fuerza reflow
+    void errorMsgContainer.offsetWidth; // Fuerza el reflow del navegador para que se pueda volver a aplicar la animación
     errorMsgContainer.style.animation = "appear 5s ease"; // Vuelve a aplicar
 }
 

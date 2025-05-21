@@ -35,7 +35,7 @@ header {
 
     background-color: #f2f7ff;
 
-    z-index: 100;
+    z-index: 600;
 }
 header .home {
     padding: 1rem;
@@ -354,6 +354,61 @@ main {
 
     position: relative;
 }
+.libroMain-container .notifications {
+    width: 28rem;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    bottom: 0; left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 700;
+}
+.libroMain-container .notifications .nonLoginNotice {
+    width: 28rem;
+    height: auto;
+    padding: 0.5rem 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #ebfaff;
+    border: 1px solid #ff914d;
+    border-radius: 1rem;
+    font-size: 16px;
+    font-weight: 300;
+    color: #ff914d;
+
+    pointer-events: none;
+    display: none;
+    opacity: 0;
+}
+.libroMain-container .notifications .errorAddingToList {
+    width: 28rem;
+    min-height: 6rem;
+    height: auto;
+    padding: 0.5rem 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #333333;
+    /* border: 2px solid #ffffff; */
+    border-radius: 1rem;
+    font-size: 20px;
+    font-weight: 300;
+    color: #cfcfcf;
+
+    pointer-events: none;
+    display: flex;
+    opacity: 0;
+}
 .book-container {
     width: 100%;
     max-width: 50rem;
@@ -636,20 +691,20 @@ main {
     font-weight: 500;
     color: #555;
 }
-.buttons .addToList-button .addToList-modal .top .wished {
+.buttons .addToList-button .addToList-modal .top .booksList-element {
     height: 4rem;
 
     display: flex;
     justify-content: space-between;
 }
-.buttons .addToList-button .addToList-modal .top .wished .left {
+.buttons .addToList-button .addToList-modal .top .booksList-element .left {
     height: 100%;
 
     display: flex;
     align-items: center;
     gap: 1rem;
 }
-.buttons .addToList-button .addToList-modal .top .wished .left .listPicture-container {
+.buttons .addToList-button .addToList-modal .top .booksList-element .left .listPicture-container {
     width: 4rem;
     height: 4rem;
 
@@ -660,11 +715,11 @@ main {
     border: 1px solid #DFE4EB;
     border-radius: 1rem;
 }
-.buttons .addToList-button .addToList-modal .top .wished .left .listPicture-container svg {
+.buttons .addToList-button .addToList-modal .top .booksList-element .left .listPicture-container svg {
     width: 2.8rem;
     height: 2.8rem;
 }
-.buttons .addToList-button .addToList-modal .top .wished .right {
+.buttons .addToList-button .addToList-modal .top .booksList-element .right {
     width: auto;
 
     display: flex;
@@ -672,7 +727,7 @@ main {
 
     display: none;
 }
-.buttons .addToList-button .addToList-modal .top .wished .right span {
+.buttons .addToList-button .addToList-modal .top .booksList-element .right span {
     width: 7rem;
     height: 3rem;
 
@@ -681,7 +736,7 @@ main {
     align-items: center;
 
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 300;
     color: #fff;
     background-color: #9B9B9B;
     border-radius: 3rem;
@@ -878,6 +933,7 @@ main {
     height: auto;
 
     display: flex;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.8rem;
@@ -973,6 +1029,18 @@ main {
     line-height: 14px;
     
     color: #3783F5;
+}
+
+@keyframes appear {
+    20% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 

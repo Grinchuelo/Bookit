@@ -19,7 +19,12 @@ if (isset($_SESSION['isAdmin'])) {
     <title>Bookit</title>
 </head>
 <body>
-  <?php include('./template/header.php') ?>
+  <?php include('./template/header.php');
+  $parameter = array_key_first($_GET);
+  /* $parameter_bookORsaga = $_GET[$parameter]; */
+
+  $type = $parameter == 'id_libro' ? 'book' : 'saga';
+  ?>
   <?php
   $id_libro = $_GET['id_libro'];
   $query = $conection->prepare("SELECT * FROM libros WHERE id_libro = :id_libro");
@@ -42,6 +47,14 @@ if (isset($_SESSION['isAdmin'])) {
   $librosDeseados = $query->fetchAll(PDO::FETCH_ASSOC); */
   ?>
   <main class="libroMain-container">
+    <div class="notifications">
+      <div class="nonLoginNotice">
+        <span>Para tener tus listas o para comprar un libro primero tenés que iniciar sesión</span>
+      </div>
+      <div class="errorAddingToList">
+        <span>Este libro ya está en la lista</span>
+      </div>
+    </div>
     <div class="book-container">
       <div class="book-data">
         <div class="book-data-first">
@@ -69,7 +82,12 @@ if (isset($_SESSION['isAdmin'])) {
                 <data class="stars">
                   4.5
                 </data>
-                <svg>
+                <svg 
+                <?php if (isset($_SESSION['check'])) {
+                        if ($_SESSION['check'] == 'OK'){
+                          echo "onclick='allowStar()'";
+                      }} ?>
+                >
                   <use href="./assets/icons/icons.svg#star-icon"></use>
                 </svg>
               </div>
@@ -88,7 +106,13 @@ if (isset($_SESSION['isAdmin'])) {
         <?php } */ ?>
       </div>
       <div class="buttons">
-        <div href="" class="pdf-button">
+        <div href="" class="pdf-button" <?php if (isset($_SESSION['check'])) {
+                                              if ($_SESSION['check'] == 'OK') { 
+                                                echo "onclick='libroDropdownOptions(event, this)'";
+                                              }}
+                                            else {
+                                                echo "onclick='appearMessage()'";
+                                            }?>>
           <svg>
             <use href="./assets/icons/icons.svg#pdf-icon"></use>
           </svg>
@@ -96,25 +120,63 @@ if (isset($_SESSION['isAdmin'])) {
             <span class="button-desc">Obtener <b>PDF</b></span>
           </div>
         </div>
-        <div href="" class="addToList-button">
-          <div class="addToList-modal">
+        <div class="addToList-button" <?php if (isset($_SESSION['check'])) {
+                                              if ($_SESSION['check'] == 'OK') { 
+                                                echo "onclick='libroDropdownOptions(event, this)'";
+                                              }}
+                                            else {
+                                                echo "onclick='appearMessage()'";
+                                            }?>>
+          <?php
+            if (isset($_SESSION['check'])) {
+          ?>
+          <div class="addToList-modal" style="display: none">
             <div class="top">
               <div class="title">
                 <h2>Guardar</h2>
               </div>
-              <div class="wished">
+              <?php
+              $stmt = $conection->prepare("SELECT * FROM listas WHERE usuario_id = ? AND tipoLista_id != 'com'");
+              $stmt->execute([$_SESSION['user_id']]);
+              $listas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+              foreach ($listas as $lista) {
+              ?>
+              <div class="booksList-element" data-booksList-id="<?php echo $lista['id_lista']; ?>" onclick="addToList(this)" listName="<?php echo $lista['nombre_lista']; ?>">
                 <div class="left">
                   <div class="listPicture-container">
-                    <svg>
-                      <use href="./assets/icons/icons.svg#bookmark-icon"></use>
-                    </svg>
+                    <?php if ($lista['tipoLista_id'] == 'des') {?>
+                      <svg>
+                        <use href="./assets/icons/icons.svg#bookmark-icon"></use>
+                      </svg>
+                    <?php } else { ?>
+                      <img src="" alt="">
+                    <?php } ?>
                   </div>
-                  <span class="listName">Deseados</span>
+                  <span class="listName"><?php echo $lista['nombre_lista']; ?></span>
                 </div>
-                <div class="right">
+                <?php
+                $user_id = $_SESSION['user_id'];
+                $parameter = array_key_first($_GET);
+
+                $type = $parameter == 'id_libro' ? 'book' : 'saga';
+                $id_bookORsaga = $type == 'book' ? $_GET['id_libro'] : $_GET['id_saga'];
+
+                if ($type == 'book') {
+                  $stmt = $conection->prepare("SELECT * FROM listas_agregados INNER JOIN listas ON lista_id = listas.id_lista WHERE listas.nombre_lista = ? AND libro_id = ? AND listas.usuario_id = ?");
+                  $stmt->execute([$lista['nombre_lista'], $id_bookORsaga, $user_id]);
+                  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                } else if ($type == 'saga') {
+                    $stmt = $conection->prepare("SELECT * FROM listas_agregados INNER JOIN listas ON lista_id = listas.id_lista WHERE listas.nombre_lista = ? AND saga_id = ? AND listas.usuario_id = ?");
+                    $stmt->execute([$lista['nombre_lista'], $id_bookORsaga, $user_id]);
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                }
+                ?>
+                <div class="right" <?php if (!empty($result)) { echo 'style="display:flex;"'; }?>>
                   <span>Guardado</span>
                 </div>
               </div>
+              <?php } ?>
             </div>
             <div class="bottom">
               <svg>
@@ -123,6 +185,7 @@ if (isset($_SESSION['isAdmin'])) {
               <span>Crear lista</span>
             </div>
           </div>
+          <?php } ?>
           <svg>
             <use href="./assets/icons/icons.svg?v=1#addToList-icon"></use>
           </svg>
@@ -449,4 +512,6 @@ if (isset($_SESSION['isAdmin'])) {
 
   <script src="./scripts/libro.js" defer></script>
   <script src="./scripts/general.js" defer></script>
-<?php include('./template/footer.php'); ?>
+
+</body>
+</html>

@@ -2,12 +2,28 @@ let dropdownIsActive = false;
 let dropDown_container;
 let options;
 
-/* const dropDown_container = document.getElementById('dropdown-container');
-const options = document.querySelector('.dropdown-options'); */
+function getParameterByName(name) {
+    return new URLSearchParams(window.location.search).get(name) || "";
+}
 
-function dropdownOptions(dropdown) {
+// Sirve para hacer que todas las mini-ventanas tengan su logica compartida de open-close
+function elementToShow(dropDown_container, displayNoneOptions) {
+    for (let hijo of dropDown_container.children) {
+        for(let className of displayNoneOptions) {
+            if (hijo.classList.contains(`${className}`)) {
+                return hijo;
+            }
+        }
+    }
+}
+
+function dropdownOptions(e, dropdown) {
+    e.stopPropagation();
+
     dropDown_container = dropdown;
-    options = dropDown_container.querySelector('.dropdown-options');
+    displayNoneOptions = ['dropdown-options', 'addToList-modal'];
+    options = elementToShow(dropDown_container, displayNoneOptions);
+
     if (options.style.display == 'none') {
         options.style.display = 'flex';
         dropdownIsActive = true;

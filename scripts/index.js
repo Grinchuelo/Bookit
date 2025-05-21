@@ -276,6 +276,16 @@ function validate(inputElement) {
     return formatIsOK;
 }
 
+function makeAppear(message) {
+    message.style.display = "flex";
+    message.style.animation = 'none';  // Resetea
+    void message.offsetWidth; // Fuerza el reflow del navegador para que se pueda volver a aplicar la animación
+    message.style.animation = "appear 5s ease"; // Vuelve a aplicar
+    setTimeout(() => {
+        message.style.display = "none";
+    }, 5000)
+}
+
 function applyErrorFormatBlurInput(inputElement) {
     let svg;
     if (inputElement.classList.contains('passwordInput')) {
@@ -390,9 +400,7 @@ function displayMessage(btnSubmit) {
         let errorSubmitMessage = document.querySelector('.errorSubmitMessage');
 
         errorSubmitMessage.firstElementChild.textContent = "Asegurate de completar todos los campos correctamente";
-        errorSubmitMessage.style.animation = 'none';  // Resetea
-        void errorSubmitMessage.offsetWidth; // Fuerza reflow
-        errorSubmitMessage.style.animation = "appear 5s ease"; // Vuelve a aplicar
+        makeAppear(errorSubmitMessage);
     }
 }
 
@@ -569,7 +577,7 @@ document.getElementById('registerUser-form').addEventListener('submit', async fu
 
         errorSubmitMessage.firstElementChild.textContent = `${result.message}`;
         errorSubmitMessage.style.animation = 'none';  // Resetea
-        void errorSubmitMessage.offsetWidth; // Fuerza reflow
+        void errorSubmitMessage.offsetWidth; // Fuerza el reflow del navegador para que se pueda volver a aplicar la animación
         errorSubmitMessage.style.animation = "appear 5s ease"; // Vuelve a aplicar
         return;
     } else {

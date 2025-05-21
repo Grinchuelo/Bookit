@@ -46,7 +46,7 @@ function sendVerificationEmail($userEmail, $username, $token)
                     <td style="padding: 30px; color: #333;">
                         <h2 style="margin-top: 0;">¡Confirmá tu cuenta!</h2>
                         <p style="font-size: 16px; line-height: 1.5;">
-                            Gracias por registrarte en <strong>Bookit</strong>. Solo falta un paso para empezar a explorar nuestro mundo de libros.
+                            Gracias por registrarte en <strong>Bookit</strong>. Solo falta un paso para empezar a explorar nuestro mundo de libros 📙📘📗
                         </p>
                         <p style="font-size: 16px;">
                             Hacé clic en el botón de abajo para verificar tu cuenta:

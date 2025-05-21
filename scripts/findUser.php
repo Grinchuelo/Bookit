@@ -33,6 +33,7 @@ if ($username != $user['nombre_usuario'] || !password_verify($password, $user['c
 
     $_SESSION['check'] = 'OK';
     $_SESSION['username'] = $username;
+    $_SESSION['user_id'] = $user['id_usuario'];
     $_SESSION['isAdmin'] = false;
     exit;
 }

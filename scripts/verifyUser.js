@@ -1,15 +1,18 @@
 function msgAppear(msgContainer, result) {
     msgContainer.firstElementChild.textContent = result.message;
     msgContainer.style.animation = 'none';  // Resetea
-    void msgContainer.offsetWidth; // Fuerza reflow
+    void msgContainer.offsetWidth; // Fuerza el reflow del navegador para que se pueda volver a aplicar la animación
     msgContainer.style.animation = "appear 5s ease"; // Vuelve a aplicar
 }
 
-function getParameterByName(name) {
+/* function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
     results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+} */
+function getParameterByName(name) {
+    return new URLSearchParams(window.location.search).get(name) || "";
 }
 
 document.querySelector('form').addEventListener('submit', async function(e) {
