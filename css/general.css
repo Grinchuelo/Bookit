@@ -1031,6 +1031,10 @@ main {
     color: #3783F5;
 }
 
+.display {
+    display: flex !important;
+}
+
 @keyframes appear {
     20% {
         opacity: 1;

@@ -60,7 +60,7 @@ if ($type == 'book') {
 ob_clean();
 echo json_encode([
     'success' => true,
-    'reason' => '',
+    'reason' => 'added',
     'message' => 'Elemento agregado a la lista'
 ]);
 exit;

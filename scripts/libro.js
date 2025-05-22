@@ -94,6 +94,16 @@ async function addToList(booksList_element) {
         const errorAddingToList = document.querySelector('.errorAddingToList');
         errorAddingToList.firstElementChild.textContent = result.message;
         makeAppear(errorAddingToList);
+    } else if (result.reason == 'added') {
+        document.querySelectorAll('.booksList-element').forEach(list => {
+            const saved = list.dataset[listName].firstElementChild.nextElementSibling;
+            saved.classList.add('display');
+        })
+    } else if (result.reason == 'deleted') {
+        document.querySelectorAll('.booksList-element').forEach(list => {
+            const saved = list.dataset[listName].firstElementChild.nextElementSibling;
+            saved.classList.remove('display');
+        })
     }
 
     console.log(result.message);

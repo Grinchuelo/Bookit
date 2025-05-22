@@ -1,12 +1,19 @@
 <?php
+include('../config.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require('../vendor/autoload.php');
 
-function sendVerificationEmail($userEmail, $username, $token)
-{
+function sendVerificationEmail($userEmail, $username, $token) {
+    $local = ($_SERVER['SERVER_NAME'] == 'localhost');
+    if ($local) {
+        $url = 'localhost/bookit/verify.php';
+    } else {
+        $url = 'bookit.grinchuelo.online/verify.php';
+    }
+
     $mail = new PHPMailer(true);
 
     try {
@@ -56,7 +63,7 @@ function sendVerificationEmail($userEmail, $username, $token)
                         <table cellpadding="0" cellspacing="0" style="margin: 20px 0;">
                             <tr>
                                 <td align="center" bgcolor="#3783f5" style="border-radius: 5px;">
-                                    <a href="localhost/bookit/verify.php?token=' . $token . '"
+                                    <a href=' . $url . '?token=' . $token . '"
                                         target="_blank"
                                         style="display: inline-block; padding: 12px 24px; color: #ffffff; text-decoration: none; font-weight: bold;">
                                         Verificar cuenta

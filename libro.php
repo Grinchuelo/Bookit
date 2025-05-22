@@ -155,24 +155,7 @@ if (isset($_SESSION['isAdmin'])) {
                   </div>
                   <span class="listName"><?php echo $lista['nombre_lista']; ?></span>
                 </div>
-                <?php
-                $user_id = $_SESSION['user_id'];
-                $parameter = array_key_first($_GET);
-
-                $type = $parameter == 'id_libro' ? 'book' : 'saga';
-                $id_bookORsaga = $type == 'book' ? $_GET['id_libro'] : $_GET['id_saga'];
-
-                if ($type == 'book') {
-                  $stmt = $conection->prepare("SELECT * FROM listas_agregados INNER JOIN listas ON lista_id = listas.id_lista WHERE listas.nombre_lista = ? AND libro_id = ? AND listas.usuario_id = ?");
-                  $stmt->execute([$lista['nombre_lista'], $id_bookORsaga, $user_id]);
-                  $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                } else if ($type == 'saga') {
-                    $stmt = $conection->prepare("SELECT * FROM listas_agregados INNER JOIN listas ON lista_id = listas.id_lista WHERE listas.nombre_lista = ? AND saga_id = ? AND listas.usuario_id = ?");
-                    $stmt->execute([$lista['nombre_lista'], $id_bookORsaga, $user_id]);
-                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                }
-                ?>
-                <div class="right" <?php if (!empty($result)) { echo 'style="display:flex;"'; }?>>
+                <div class="right">
                   <span>Guardado</span>
                 </div>
               </div>
