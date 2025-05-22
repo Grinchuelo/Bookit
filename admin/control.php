@@ -1,5 +1,5 @@
 <?php
-session_start();
+include('../config.php');
 if (isset($_SESSION['isAdmin'])) {
     if (!$_SESSION['isAdmin']) {
         $noAuth = true;
@@ -51,7 +51,6 @@ if ($noAuth) {
     <main>
         <div class="lastAdded-container">
             <?php
-            include('../config.php');
             $query = $conection->prepare("SELECT * FROM libros 
                                         INNER JOIN autores ON autores.id_autor = libros.autor_id
                                         ORDER BY libros.fecha_catalogo DESC;");

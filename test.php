@@ -43,68 +43,22 @@ function validatePassword($password)
     <span>SatChit<span>Ananda</span></span>
 
     <?php
-    header('Content-Type: application/json; charset=utf-8');
-include('./config.php');
+    date_default_timezone_set('America/Argentina/Cordoba');
+    $hoy = date("Y-m-d");
 
-$user_id = $_SESSION['user_id'];
-$parameter = array_key_first($_GET);
-$listName = $_GET['listName'];
+    echo $hoy;
 
-$type = $parameter == 'id_libro' ? 'book' : 'saga';
-$id_bookORsaga = $type == 'book' ? $_GET['id_libro'] : $_GET['id_saga'];
+    include('./config.php');
+    include('./scripts/generateListID.php');
 
-// Si ya fue agregado a la lista
-if ($type == 'book') {
-    $stmt = $conection->prepare("SELECT * FROM listas_agregados INNER JOIN listas ON lista_id = listas.id_lista WHERE listas.nombre_lista = ? AND libro_id = ? AND listas.usuario_id = ?");
-    $stmt->execute([$listName, $id_bookORsaga, $user_id]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-} else if ($type == 'saga') {
-    $stmt = $conection->prepare("SELECT * FROM listas_agregados INNER JOIN listas ON lista_id = listas.id_lista WHERE listas.nombre_lista = ? AND saga_id = ? AND listas.usuario_id = ?");
-    $stmt->execute([$listName, $id_bookORsaga, $user_id]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-}
+    $stmt = $conection->prepare("SELECT * FROM listas ORDER BY id_lista DESC LIMIT 1");
+    $stmt->execute();
+    $lastList = $stmt->fetch(PDO::FETCH_ASSOC);
+    $lastListID = $lastList['id_lista'];
 
-if (!empty($result)) {
-    ob_clean();
-    echo json_encode([
-        'success' => false,
-        'reason' => 'alreadyAdded',
-        'message' => 'Este libro ya está en la lista'
-    ]);
-    exit;
-}
+    echo $lastListID;
 
-// Si los parámetros o los valores enviados por GET están mal
-$stmt = $conection->prepare("SELECT * FROM listas WHERE usuario_id = ? AND nombre_lista = ?");
-$stmt->execute([$user_id, $listName]);
-$lista = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if (empty($lista)) {
-    ob_clean();
-    echo json_encode([
-        'success' => false,
-        'reason' => 'wrongData',
-        'message' => 'Error al agregar a lista'
-    ]);
-    exit;
-}
-
-// En caso de éxito
-if ($type == 'book') {
-    $stmt = $conection->prepare("INSERT INTO listas_agregados(lista_id, saga_id, libro_id) VALUES (?, ?, ?)");
-    $stmt->execute([$lista['id_lista'], null, $id_bookORsaga]);
-} else if ($type == 'saga') {
-    $stmt = $conection->prepare("INSERT INTO listas_agregados(lista_id, saga_id, libro_id) VALUES (?, ?, ?)");
-    $stmt->execute([$lista['id_lista'], $id_bookORsaga, null]);
-}
-
-ob_clean();
-echo json_encode([
-    'success' => true,
-    'reason' => '',
-    'message' => 'Elemento agregado a la lista'
-]);
-exit;
+    echo generarSiguienteID($lastListID);
     ?>
 </body>
 

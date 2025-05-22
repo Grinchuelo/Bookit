@@ -1,6 +1,8 @@
 <?php
-include('../config.php');
-
+/* if (!isset($_SESSION['sessionStarted'])) {
+    include('../config.php');
+}
+ */
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -63,7 +65,7 @@ function sendVerificationEmail($userEmail, $username, $token) {
                         <table cellpadding="0" cellspacing="0" style="margin: 20px 0;">
                             <tr>
                                 <td align="center" bgcolor="#3783f5" style="border-radius: 5px;">
-                                    <a href=' . $url . '?token=' . $token . '"
+                                    <a href="' . $url . '?token=' . $token . '"
                                         target="_blank"
                                         style="display: inline-block; padding: 12px 24px; color: #ffffff; text-decoration: none; font-weight: bold;">
                                         Verificar cuenta
@@ -73,7 +75,7 @@ function sendVerificationEmail($userEmail, $username, $token) {
                         </table>
 
                         <p style="font-size: 14px; color: #666;">
-                            Si vos no creaste esta cuenta, podés ignorar este correo con total tranquilidad.
+                            Si vos no creaste esta cuenta, podés ignorar este correo con total tranquilidad. Tu dirección no será asociada a ninguna cuenta y no tomaremos ninguna acción sin tu confirmación.
                         </p>
                     </td>
                 </tr>

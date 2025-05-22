@@ -5,11 +5,7 @@ require('../config.php');
 $email = trim($_POST['email'] ?? '');                                  //
 $username = trim($_POST['username'] ?? '');                            //
 $passwordValue = $_POST['password'] ?? '';
-$options = [
-    'cost' => 11,
-    'salt' => bin2hex(openssl_random_pseudo_bytes(16))
-];
-$password = password_hash($passwordValue, PASSWORD_BCRYPT, $options);  //
+$password = password_hash($passwordValue, PASSWORD_BCRYPT);  //
 $validatePassword = $_POST['validatePassword'] ?? '';                  //
 date_default_timezone_set('America/Argentina/Cordoba');
 $date = date("Y-m-d H:i:s");                                           //

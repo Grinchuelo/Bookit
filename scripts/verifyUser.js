@@ -35,10 +35,6 @@ document.querySelector('form').addEventListener('submit', async function(e) {
         console.error('Error: ', error);
     })
 
-    console.log(result.username);
-    console.log(result.password);
-    console.log(result.verifyPass);
-    console.log(result.contra);
     const msgContainer = document.getElementById('msg-container');
     if (result.success == false) {
         if (msgContainer.classList.contains('successMsg-container')) {
