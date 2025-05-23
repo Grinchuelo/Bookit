@@ -38,5 +38,4 @@ try {
 ]); */
 
 session_start();
-$_SESSION['sessionStarted'] = true;
 ?>

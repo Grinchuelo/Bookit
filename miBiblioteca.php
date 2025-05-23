@@ -1,11 +1,3 @@
-<?php
-if (isset($_SESSION['isAdmin'])) {
-    if ($_SESSION['isAdmin'] == true) {
-        $_SESSION = array();
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>

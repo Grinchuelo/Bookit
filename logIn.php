@@ -1,12 +1,6 @@
 <?php
 include('./config.php');
 
-if (isset($_SESSION['isAdmin'])) {
-    if ($_SESSION['isAdmin'] == true) {
-        $_SESSION = array();
-    }
-}
-
 // Redirigir a la home si el usuario ya está logeado
 if (isset($_SESSION['check'])) {
     header('Location:home.php');

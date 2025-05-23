@@ -10,15 +10,8 @@
   <title>Bookit</title>
 </head>
 <body>
-
   <?php 
   include('./config.php');
-
-  if (isset($_SESSION['isAdmin'])) {
-    if ($_SESSION['isAdmin'] == true) {
-      $_SESSION = array();
-    }
-  }
 
   include('./template/header.php') ?>
   <menu>

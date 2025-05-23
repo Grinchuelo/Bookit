@@ -39,21 +39,21 @@ if ($username != $user['nombre_usuario'] || !password_verify($password, $user['c
     $hoy = date("Y-m-d");
     include('./generateListID.php');
 
+    // Generar lista deseados
     $stmt = $conection->prepare("SELECT * FROM listas ORDER BY id_lista DESC LIMIT 1");
     $stmt->execute();
     $lastList = $stmt->fetch(PDO::FETCH_ASSOC);
     $lastListID = $lastList['id_lista'];
 
-    // Generar lista deseados
     $stmt = $conection->prepare("INSERT INTO listas(id_lista, nombre_lista, portada_lista, fecha_lista, usuario_id, tipoLista_id) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->execute([generarSiguienteID($lastListID), 'Deseados', 'deseados_portada', $hoy, $user['id_usuario'], 'des']);
     
+    // Generar lista comprados
     $stmt = $conection->prepare("SELECT * FROM listas ORDER BY id_lista DESC LIMIT 1");
     $stmt->execute();
     $lastList = $stmt->fetch(PDO::FETCH_ASSOC);
     $lastListID = $lastList['id_lista'];
 
-    // Generar lista comprados
     $stmt = $conection->prepare("INSERT INTO listas(id_lista, nombre_lista, portada_lista, fecha_lista, usuario_id, tipoLista_id) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->execute([generarSiguienteID($lastListID), 'Comprados', 'comprados_portada', $hoy, $user['id_usuario'], 'com']);
     
