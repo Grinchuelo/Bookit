@@ -28,14 +28,14 @@ try {
     echo "La conexión falló. Por favor intentá de nuevo más tarde.";
 }
 
-/* session_set_cookie_params([
-    "lifetime" => time() + 60*60*4, // 4 horas de sesión
-    "path" => "/", // La cookie se carga en cualquier parte del sitio
-    "domain" => $_SERVER['HTTP_HOST'], // Se adapta al entorno ya sea local o producción
-    "secure" => true,  // Solo en HTTPS
-    "httponly" => true,  // No es accesible desde JavaScript (Anti-XSS)
-    "samesite" => "Strict" // Protección contra CSRF
-]); */
+session_set_cookie_params([
+    "lifetime" => 60 * 60 * 4, // 4 horas
+    "path" => "/",             // Muy importante que sea '/'
+    "domain" => $_SERVER['HTTP_HOST'], // O el dominio sin subdominios si estás en un *.grinchuelo.online
+    "secure" => true,          // Solo si estás usando HTTPS
+    "httponly" => true,
+    "samesite" => "Strict"
+]);
 
 session_start();
 ?>
