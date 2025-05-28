@@ -1,6 +1,10 @@
 <?php
 include('./config.php');
-header('Location: preCheck.php?request=signup');
+
+if (!$_GET['checked'] == 1) {
+    header('Location: preCheck.php?request=signup');
+    exit;
+}
 
 // Redirigir a la home si el usuario ya está logeado
 if (isset($_SESSION['check'])) {
