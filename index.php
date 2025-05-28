@@ -1,15 +1,13 @@
 <?php
 // Si el usuario está logeado, redirigir a la home
-session_start();
-
-if (isset($_SESSION['check'])) {
-    header('Location:home.php');
-    die();
-} 
+if (!$_GET['checked'] == 1) {
+    header('Location: preCheck.php?request=index');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -27,15 +27,4 @@ try {
     error_log($ex->getMessage());
     echo "La conexión falló. Por favor intentá de nuevo más tarde.";
 }
-
-session_set_cookie_params([
-    "lifetime" => 60 * 60 * 4, // 4 horas
-    "path" => "/",             // Muy importante que sea '/'
-    "domain" => $_SERVER['HTTP_HOST'], // O el dominio sin subdominios si estás en un *.grinchuelo.online
-    "secure" => true,          // Solo si estás usando HTTPS
-    "httponly" => true,
-    "samesite" => "Strict"
-]);
-
-session_start();
 ?>

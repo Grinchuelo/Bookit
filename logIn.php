@@ -1,15 +1,14 @@
 <?php
 include('./config.php');
 
-// Redirigir a la home si el usuario ya está logeado
-if (isset($_SESSION['check'])) {
-    header('Location:home.php');
-    die();
+if (!$_GET['checked'] == 1) {
+    header('Location: preCheck.php?request=login');
+    exit;
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

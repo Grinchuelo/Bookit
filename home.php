@@ -12,8 +12,11 @@
 <body>
   <?php 
   include('./config.php');
-
-  include('./template/header.php') ?>
+  session_start();
+  include('./template/header.php'); 
+  
+  print_r($_SESSION);
+  ?>
   <menu>
     <input type="text" name="" id="" placeholder="Buscar un libro...">
     <div class="dropdown-genres">

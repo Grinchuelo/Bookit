@@ -1,5 +1,6 @@
 <?php
 // oo gracias chatGPT
+// Genera ID de listas en formato aaa000
 function generarSiguienteID($id_anterior) {
     $letras = substr($id_anterior, 0, 3);
     $numeros = substr($id_anterior, 3, 3);

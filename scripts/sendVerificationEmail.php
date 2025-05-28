@@ -92,15 +92,6 @@ function sendVerificationEmail($userEmail, $username, $token) {
     </tr>
 </table>
 ';
-        /*📨 ¿No fuiste vos? No te preocupes.
-
-Parece que alguien usó esta dirección de correo para registrarse en Bookit.
-Si vos no iniciaste este registro, podés simplemente ignorar este mensaje.
-Tu dirección no será asociada a ninguna cuenta y no tomaremos ninguna acción sin tu confirmación.
-
-Gracias por tu paciencia,
-El equipo de Bookit 📚 */
-
         $mail->send();
         return true;
     } catch (Exception $e) {

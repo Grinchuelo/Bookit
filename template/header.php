@@ -18,8 +18,8 @@
                     <a href="./miBiblioteca.php">Mi biblioteca</a>
                     <a href="./global/logout.php" style="color: #e72323">Cerrar sesión</a>
                 <?php } else { ?>
-                    <a href="./signUp.php">Registrarme</a>
-                    <a href="./logIn.php">Iniciar sesión</a>
+                    <a href="./preCheck.php?request=signup">Registrarme</a>
+                    <a href="./preCheck.php?request=login">Iniciar sesión</a>
                 <?php }?>
             </div>
         </div>
