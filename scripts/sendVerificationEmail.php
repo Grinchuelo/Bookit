@@ -7,6 +7,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require('../vendor/autoload.php');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
+$dotenv->load();
 
 function sendVerificationEmail($userEmail, $username, $token) {
     $local = ($_SERVER['SERVER_NAME'] == 'localhost');
@@ -22,10 +24,10 @@ function sendVerificationEmail($userEmail, $username, $token) {
         // Configuración del servidor
         $mail->isSMTP();
         $mail->CharSet    = 'UTF-8';
-        $mail->Host       = 'PROTECTEDbyBFG';
+        $mail->Host       = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'PROTECTEDbyBFG';
-        $mail->Password   = 'PROTECTEDbyBFG';
+        $mail->Username   = $_ENV['EMAIL_USERNAME'];
+        $mail->Password   = $_ENV['EMAIL_PASSWORD'];
         $mail->SMTPSecure = 'ssl';
         $mail->Port       = 465;
 
