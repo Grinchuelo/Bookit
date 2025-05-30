@@ -32,7 +32,7 @@ function sendVerificationEmail($userEmail, $username, $token) {
         $mail->Port       = 465;
 
         // De: 
-        $mail->setFrom('PROTECTEDbyBFG', 'Bookit');
+        $mail->setFrom('bookit@grinchuelo.online', 'Bookit');
         // Para:
         $mail->addAddress($userEmail, $username);
 
